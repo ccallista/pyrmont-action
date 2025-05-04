@@ -13,31 +13,46 @@
       />
     </div>
 
-    <!-- RIGHT: Headline, smaller image, text -->
-    <div class="news-content glass-card">
+    <div v-for="newsItem in newsList" :key="newsItem.news_id" class="news-content glass-card">
       <h2 class="news-heading">Latest News</h2>
-
       <div class="news-image-small">
-        <img
-            src="../../../assets/News/pyrmont_bay_sunset.png"
-            alt="Sunset over the water"
-        />
+        <img :src="`/src/assets/News/${newsItem.news_image_path}`" alt="News Image" />
       </div>
-
       <div class="news-post">
-        <h3 class="post-title">Post Title</h3>
-        <p class="post-body">
-          Body text for whatever you’d like to say. Add main takeaway points,
-          quotes, anecdotes, or even a very short story.
-        </p>
-        <button class="read-more-button">Read More</button>
+        <h3 class="post-title">{{ newsItem.news_title }}</h3>
+        <p class="post-body">{{ newsItem.news_description }}</p>
+        <p><strong>Date:</strong> {{ newsItem.news_date }}</p>
+        
+        <router-link class="link" :to="{ name: '', params: { id: newsItem.news_id } }">
+          <button class="read-more-button">Read More</button>
+        </router-link>
       </div>
     </div>
   </section>
 </template>
 
-<script setup>
-// Purely presentational
+<script>
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      newsList: [], // Array to hold the news data
+    };
+  },
+  mounted() {
+    // Fetch data when the component is mounted
+    axios
+      .get('http://localhost:5000/api/news')
+      .then((response) => {
+        console.log(response.data);
+        this.newsList = response.data.news.slice(-1);
+      })
+      .catch((error) => {
+        console.error('Error fetching news:', error);
+      });
+  },
+};
 </script>
 
 <style scoped>
@@ -198,7 +213,7 @@
 /* Smaller image inside the card */
 .news-image-small {
   width: 100%;
-  max-width: 420px;
+  max-width: 100%;
   border-radius: 8px;
   overflow: hidden;
 
