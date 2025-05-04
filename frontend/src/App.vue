@@ -117,7 +117,7 @@ const route = useRoute()
 
   /* Also keep the bottom padding (and possibly side padding) from about-us.
      For example, you can do: */
-  padding-bottom: 2rem;
+  /* padding-bottom: 2rem; */
 
   /* If you want some horizontal padding as well, do e.g. */
   /* padding: 0 2rem; */

@@ -15,19 +15,35 @@ const db = new sqlite3.Database('./database.db', (err) => {
   else console.log("Connected to SQLite database.");
 });
 
+// Create 'users' table if it doesn't exist
+
+db.run(`
+  CREATE TABLE IF NOT EXISTS users (
+    email TEXT PRIMARY KEY,
+    password TEXT NOT NULL,
+    firstName VARCHAR(50) NOT NULL,
+    lastName VARCHAR(50) NOT NULL,
+    mobilePhone VARCHAR(15) NOT NULL,
+    areaOfInterest TEXT NOT NULL,
+    streetName VARCHAR(100) NOT NULL,
+    city VARCHAR(50) NOT NULL,
+    state VARCHAR(3) NOT NULL,
+    postcode VARCHAR(4) NOT NULL
+  );
+
+`);
+
+const userRouter = require('./user/userRoutes')
+app.use("", function(req, res, next) {
+  req.db = db;
+  next();
+},
+userRouter);
+
+
 newsModel(db);
 
 app.use('/api/news', newsRoutes(db));
-
-
-// // Create 'users' table if it doesn't exist
-// db.run(`
-//   CREATE TABLE IF NOT EXISTS users (
-//     id INTEGER PRIMARY KEY AUTOINCREMENT,
-//     username TEXT NOT NULL,
-//     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-//   )
-// `);
 
 // // GET all users
 // app.get('/api/users', (req, res) => {
