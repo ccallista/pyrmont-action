@@ -14,8 +14,8 @@
         <li><RouterLink class="link" :to="{ name: 'news'     }">News</RouterLink></li>
         <li><RouterLink class="link" :to="{ name: 'gallery'  }">Gallery</RouterLink></li>
         <li><RouterLink class="link" :to="{ name: 'contact'  }">Contact</RouterLink></li>
-        <li><a class="link"  href="#">Join&nbsp;Us</a></li>
-        <li><a class="login" href="#">Login</a></li>
+        <li><RouterLink class="link" :to="{ name: 'Join Us'  }">Join Us</RouterLink></li>
+        <li><RouterLink class="login" :to="{ name: 'Login'  }">Login</RouterLink></li>
       </ul>
     </nav>
   </header>
