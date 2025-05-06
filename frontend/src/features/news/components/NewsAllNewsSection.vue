@@ -9,81 +9,45 @@
     <!-- Title -->
     <h1 class="all-news-title">All News</h1>
 
-    <!-- News Grid -->
     <div class="news-grid">
-      <!-- Example Card 1 -->
-      <div class="news-card glass-card">
-        <div class="news-card-image">
-          <img
-              src="../../../assets/News/pyrmont_town.png"
-              alt="Pyrmont building"
-          />
-        </div>
-        <div class="news-card-text">
-          <h2 class="news-title">News Title</h2>
-          <p class="news-body">
-            Body text for whatever you'd like to say. Add main takeaway
-            points, quotes, anecdotes, or even a short story.
-          </p>
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="news-card glass-card">
-        <div class="news-card-image">
-          <img
-              src="../../../assets/News/pyrmont_sunset.png"
-              alt="Sunset at the Anzac Bridge"
-          />
-        </div>
-        <div class="news-card-text">
-          <h2 class="news-title">News Title</h2>
-          <p class="news-body">
-            Body text for whatever you'd like to say. Add main takeaway
-            points, quotes, anecdotes, or even a short story.
-          </p>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="news-card glass-card">
-        <div class="news-card-image">
-          <img
-              src="../../../assets/News/pyrmont_skyline.png"
-              alt="Sydney cityscape"
-          />
-        </div>
-        <div class="news-card-text">
-          <h2 class="news-title">News Title</h2>
-          <p class="news-body">
-            Body text for whatever you'd like to say. Add main takeaway
-            points, quotes, anecdotes, or even a short story.
-          </p>
-        </div>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="news-card glass-card">
-        <div class="news-card-image">
-          <img
-              src="../../../assets/News/pyronty_yachts.png"
-              alt="Marina with boats"
-          />
-        </div>
-        <div class="news-card-text">
-          <h2 class="news-title">News Title</h2>
-          <p class="news-body">
-            Body text for whatever you'd like to say. Add main takeaway
-            points, quotes, anecdotes, or even a short story.
-          </p>
-        </div>
+      <div v-for="newsItem in newsList" :key="newsItem.news_id" class="news-card glass-card">
+        <router-link class="link" :to="{ name: '', params: { id: newsItem.news_id } }">
+          <div class="news-card-image">
+            <img :src="`/src/assets/News/${newsItem.news_image_path}`" alt="News Image" />
+          </div>
+          <div class="news-card-text">
+            <h2 class="news-title">{{ newsItem.news_title }}</h2>
+            <p class="news-body">{{ newsItem.news_description }}</p>
+            <p><strong>Date:</strong> {{ newsItem.news_date }}</p>
+          </div>
+        </router-link>
       </div>
     </div>
   </section>
 </template>
 
-<script setup>
-// no script logic required for a static layout
+<script>
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      newsList: [], // Array to hold the news data
+    };
+  },
+  mounted() {
+    // Fetch data when the component is mounted
+    axios
+      .get('http://localhost:5000/api/news')
+      .then((response) => {
+        console.log(response.data);
+        this.newsList = response.data.news;
+      })
+      .catch((error) => {
+        console.error('Error fetching news:', error);
+      });
+  },
+};
 </script>
 
 <style scoped>
@@ -226,8 +190,15 @@
 /* ===============================
    5. Card Image
 =============================== */
+.news-card-image {
+  height: 175px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
 .news-card-image img {
   width: 100%;
+  height: 100%;
   display: block;
   object-fit: cover;
   transition: transform 0.4s, filter 0.4s;
@@ -275,5 +246,10 @@
   .bottom-wave {
     height: 60px;
   }
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
 }
 </style>
