@@ -11,9 +11,14 @@ import loginAuthenticationService from '../services/loginAuthServices'
         try{
             const response = await loginAuthenticationService.login(loginInput);
             loginErrors.value = response.ok ? false : true;
-  
+            response.json().then(data => {
+                localStorage.setItem('accessToken', data.accessToken);
+                localStorage.setItem('refreshToken', data.refreshToken);      
+            });
+
         }
         catch(error){
+            console.log(error)
             loginErrors.value = true;
         }
     }

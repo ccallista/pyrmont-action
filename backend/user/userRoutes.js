@@ -1,4 +1,4 @@
-const userController = require('./userController') 
+const userController = require('./userController')
 const router = require('express').Router();
 
 router.post('/api/submitForm', function(req, res){
@@ -8,7 +8,7 @@ router.post('/api/submitForm', function(req, res){
 router.post('/api/login', function(req, res){
     userController.login(req, res, req.db);
 })
-    
+
 
 
 module.exports = router;
