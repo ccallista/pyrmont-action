@@ -32,4 +32,17 @@ export default defineConfig({
       '/api': 'http://localhost:5000',
     },
   },
+
+  // exludes e2e tests when conducting unit testing 
+  test: {
+    environment: 'jsdom',
+    exclude: [
+      'node_modules/**',
+      'e2e/**',
+      'playwright-report/**',
+      'test-results/**'
+    ]
+    
+  }
+
 })

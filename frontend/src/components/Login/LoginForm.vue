@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import authenticationAPI from '../../feature/JoinUs/services/joinUsAuthService'
+import authenticationAPI from '../../features/JoinUs/services/joinUsAuthService' // path was missing a letter 
     const loginInput = {
         email: '',
         password: ''
