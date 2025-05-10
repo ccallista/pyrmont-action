@@ -14,7 +14,7 @@
         <div class="project-card__image-container">
           <img
               class="project-card__image"
-              :src="project.image"
+              :src="`/src/assets/News/${project.project_image}`"
               :alt="project.title"
           />
           <!-- Optional overlay that appears on hover
@@ -24,12 +24,13 @@
 
         <!-- Card Content -->
         <div class="project-card__info">
-          <h3 class="project-card__title">{{ project.title }}</h3>
-          <p class="project-card__body">{{ project.description }}</p>
-          <p class="project-card__body">{{ project.extraText }}</p>
+          <h3 class="project-card__title">{{ project.project_name }}</h3>
+          <p class="project-card__body">{{ project.project_description }}</p>
+          <!-- <p class="project-card__body">{{ project.extraText }}</p> -->
 
           <!-- Learn More Link -->
-          <a href="#" class="project-card__link">
+
+          <a :href="`/projects/${project.project_name}`" class="project-card__link">
             LEARN MORE
             <span class="arrow">→</span>
           </a>

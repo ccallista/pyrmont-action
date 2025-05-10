@@ -11,4 +11,10 @@ export const projectsRoutes = [
             },
         ],
     },
+
+    {
+        path: '/projects/:projectName',
+        name: 'individual projects',
+        component: () => import('./pages/IndividualProjectView.vue')
+    }
 ]

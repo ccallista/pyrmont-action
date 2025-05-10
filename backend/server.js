@@ -15,10 +15,29 @@ const db = new sqlite3.Database('./database.db', (err) => {
   else console.log("Connected to SQLite database.");
 });
 
-// Create 'users' table if it doesn't exist
+// Creates all tables if it doesn't exist
 
-db.run(`
-  CREATE TABLE IF NOT EXISTS users (
+
+db.exec(`
+    CREATE TABLE IF NOT EXISTS projects(
+    project_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    project_name TEXT NOT NULL,
+    project_description TEXT NOT NULL,
+    project_type TEXT NOT NULL,
+    project_image TEXT,
+    project_date DATE NOT NULL
+  );
+
+  CREATE TABLE IF NOT EXISTS project_section(
+    section_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    section_heading TEXT NOT NULL, 
+    section_description TEXT NOT NULL, 
+    section_images_path TEXT,
+    project_id INTEGER NOT NULL,
+    FOREIGN KEY (project_id) REFERENCES projects(project_id)
+  );
+
+    CREATE TABLE IF NOT EXISTS users (
     email TEXT PRIMARY KEY,
     password TEXT NOT NULL,
     firstName VARCHAR(50) NOT NULL,
@@ -33,12 +52,20 @@ db.run(`
 
 `);
 
+
 const userRouter = require('./user/userRoutes')
+const projectRoutes = require('./projects/projectRoutes')
+
 app.use("", function(req, res, next) {
   req.db = db;
   next();
 },
 userRouter);
+
+app.use("", function(req, res, next) {
+  req.db = db;
+  next();
+}, projectRoutes);
 
 
 newsModel(db);

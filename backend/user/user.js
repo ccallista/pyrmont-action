@@ -1,27 +1,5 @@
 const sqlite3 = require('sqlite3').verbose();
 const bcrypt = require('bcrypt')
-// const db = new sqlite3.Database('./database.db', (err) => {
-//     if (err) console.error(err.message);
-//     else console.log("Connected to SQLite database.");
-// });
-
-
-// db.run(`
-//   CREATE TABLE IF NOT EXISTS test (
-//     email TEXT PRIMARY KEY,
-//     password TEXT NOT NULL,
-//     firstName VARCHAR(50) NOT NULL,
-//     lastName VARCHAR(50) NOT NULL,
-//     mobilePhone VARCHAR(15) NOT NULL,
-//     areaOfInterest TEXT NOT NULL,
-//     streetName VARCHAR(100) NOT NULL,
-//     city VARCHAR(50) NOT NULL,
-//     state VARCHAR(3) NOT NULL,
-//     postcode VARCHAR(4) NOT NULL
-//   );
-
-// `);
-
 
 module.exports = {
     async hashPassword(password){
