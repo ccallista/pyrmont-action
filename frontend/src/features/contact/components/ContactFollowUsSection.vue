@@ -7,28 +7,13 @@
     <!-- Social Icons only -->
     <div class="social-icons">
       <!-- Facebook -->
-      <a href="https://www.facebook.com" target="_blank" rel="noopener">
+      <a href="https://www.facebook.com/people/Pyrmont-Action/100066510758084/#" target="_blank" rel="noopener">
         <img src="../../../assets/svg_icons/facebook_icon.svg" alt="Facebook" />
       </a>
 
       <!-- Instagram -->
-      <a href="https://www.instagram.com" target="_blank" rel="noopener">
+      <a href="https://www.instagram.com/pyrmontaction/" target="_blank" rel="noopener">
         <img src="../../../assets/svg_icons/instagram_icon.svg" alt="Instagram" />
-      </a>
-
-      <!-- WhatsApp -->
-      <a href="https://www.whatsapp.com" target="_blank" rel="noopener">
-        <img src="../../../assets/svg_icons/whatsApp_icon.svg" alt="WhatsApp" />
-      </a>
-
-      <!-- YouTube -->
-      <a href="https://www.youtube.com" target="_blank" rel="noopener">
-        <img src="../../../assets/svg_icons/youtube_icon.svg" alt="YouTube" />
-      </a>
-
-      <!-- X (formerly Twitter) -->
-      <a href="https://twitter.com" target="_blank" rel="noopener">
-        <img src="../../../assets/svg_icons/x_icon.svg" alt="X (Twitter)" />
       </a>
     </div>
   </section>
