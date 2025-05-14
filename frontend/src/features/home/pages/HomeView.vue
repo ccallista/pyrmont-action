@@ -23,9 +23,9 @@
 <script>
 import Carousel from "../components/Carousel.vue";
 import Slide from "../components/Slide.vue";
-import CoreValues from "../components/CoreValues.vue"
-import News from "../components/News.vue"
-import Projects from "../components/Projects.vue"
+import CoreValues from "../components/CoreValues.vue";
+import News from "../components/News.vue";
+import Projects from "../components/Projects.vue";
 
 export default {
     name: "home",

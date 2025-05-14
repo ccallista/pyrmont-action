@@ -11,4 +11,9 @@ export const newsRoutes = [
             },
         ],
     },
+    {
+        path: '/news/:id',
+        name: 'IndividualNews',
+        component: () => import('./pages/NewsIndividualView.vue'),
+    },
 ]

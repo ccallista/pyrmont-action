@@ -16,6 +16,18 @@ module.exports = (db) => {
         });
     });
 
+    //GET news item by id
+    router.get('/:id', (req, res) => {
+        const newsId = req.params.id;
+        db.get('SELECT * FROM news WHERE news_id = ?', [newsId], (err, row) => {
+            if (err) {
+                res.status(500).json({ error: err.message });
+            } else {
+                res.json({ news: row });
+            }
+        });
+    })
+
     return router;
 }
 

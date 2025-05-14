@@ -68,7 +68,7 @@ nav li {
   align-items: center;
 }
 
-.link,
+.navigation .link,
 .login {
   font-size: 14px;
   font-weight: 500;

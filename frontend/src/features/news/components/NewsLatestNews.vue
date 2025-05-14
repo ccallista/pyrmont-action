@@ -23,7 +23,7 @@
         <p class="post-body">{{ newsItem.news_description }}</p>
         <p><strong>Date:</strong> {{ newsItem.news_date }}</p>
         
-        <router-link class="link" :to="{ name: '', params: { id: newsItem.news_id } }">
+        <router-link class="link" :to="{ name: 'IndividualNews', params: { id: newsItem.news_id } }">
           <button class="read-more-button">Read More</button>
         </router-link>
       </div>

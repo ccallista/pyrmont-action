@@ -11,7 +11,7 @@
 
     <div class="news-grid">
       <div v-for="newsItem in newsList" :key="newsItem.news_id" class="news-card glass-card">
-        <router-link class="link" :to="{ name: '', params: { id: newsItem.news_id } }">
+        <router-link class="link" :to="{ name: 'IndividualNews', params: { id: newsItem.news_id } }">
           <div class="news-card-image">
             <img :src="`/src/assets/News/${newsItem.news_image_path}`" alt="News Image" />
           </div>

@@ -110,7 +110,7 @@ export default {
     transform: translateY(-5px);
 }
 
-.link {
+.news-block .link {
     text-decoration: none;
     transition: .5s ease all;
     color: #000;
