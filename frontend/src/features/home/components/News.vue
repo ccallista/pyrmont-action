@@ -40,6 +40,7 @@ export default {
     axios
       .get('http://localhost:5000/api/news')
       .then((response) => {
+        console.log(response);
         console.log(response.data);
         this.newsList = response.data.news.slice(-3);
       })
