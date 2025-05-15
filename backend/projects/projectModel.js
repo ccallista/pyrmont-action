@@ -12,7 +12,7 @@ module.exports = {
 
     async getProject(db, project_name){
       return new Promise((resolve, reject) => {
-        query = "SELECT project_name, project_description, project_type FROM projects WHERE project_name = ?;"
+        query = "SELECT project_name, project_description, project_type, project_image FROM projects WHERE project_name = ?;"
         db.get(query, [project_name], (error, result) => {
           if (error) reject("Issues with retrieving " + project_name + ": "+ error);
             resolve(result);

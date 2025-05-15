@@ -1,32 +1,60 @@
-<script>
-    import projectImg1 from '@/assets/Projects/image_1.png'
+<script setup>
+    import { ref, watch } from 'vue';
+    import { useRoute } from 'vue-router'
 
-    const openProjects = 
-        {
-            image: '@/assets/Projects/image_1.png',
-            title: 'Open Project Title 1',
-            description: 'Lorem ipsum dolor sit amet...',
-            extraText: 'Additional text...'
+    import projects from "../services/projectServices"
+    const individualProject = ref([])
+    const route = useRoute();
+    watch(() => route.params.projectName, fetchData, {immediate: true})
+
+    async function fetchData(id){
+
+        try{
+            const response = await projects.getIndividualProjects(id);
+            const projectData = await response.json();
+            individualProject.value = projectData.project;
+            console.log(individualProject.value)
         }
-    
+
+        catch(error){
+            console.log("Error with inserting images onto the webpage")
+        }
+    }
+
+
 </script>
 
 
 <template>
     <div class="left-container">
-
-        <img src=@/assets/Projects/image_1.png alt='project image'/>
-        <h1>Project 1</h1>
-        <p> description </p>
-        <p> extra text </p>
-        
+        <div class="content">
+            <img class="image-top" :src="`/src/assets/Projects/${individualProject.project_image}`" alt='project image'/>
+            <h1 class="projectName-heading">{{ individualProject.project_name }}</h1>
+            <p> {{ individualProject.project_description }} </p>
+        </div>
     </div>
 </template>
 
 <style>
     .left-container{
-        width: 75vw;
+        width: 65vw;
         display: flex;
+        flex-direction: column;
+        
     }
+    .content{
+        padding-top: 20px;
+        padding-left: 30px;
+    }
+    .image-top{
+        width: 100%;
+        height:550px;
+        padding-bottom: 35px
+    }
+
+    .projectName-heading{
+        font-family: Inter;
+    }
+    
 
 </style>

@@ -41,7 +41,7 @@ import ProjectsCardGrid from '@/features/projects/components/ProjectsCardGrid.vu
     openProjects.value = projectData.openProjects;
     closedProjects.value = projectData.closedProjects;
     plannedProjects.value = projectData.plannedProjects;
-    
+
   }
   catch(error){
     console.log("Error with inserting images onto the webpage")

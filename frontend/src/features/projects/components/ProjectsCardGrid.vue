@@ -14,7 +14,7 @@
         <div class="project-card__image-container">
           <img
               class="project-card__image"
-              :src="`/src/assets/News/${project.project_image}`"
+              :src="`/src/assets/Projects/${project.project_image}`"
               :alt="project.title"
           />
           <!-- Optional overlay that appears on hover
