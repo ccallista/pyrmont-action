@@ -1,8 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
 const bcrypt = require('bcrypt')
 
-
-
 module.exports = {
     async hashPassword(password){
       return new Promise((resolve, reject) => {
