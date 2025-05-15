@@ -23,7 +23,7 @@ const api = {
                 
                 body: JSON.stringify(data),
                 
-            });
+            })
             return response;
 
         }

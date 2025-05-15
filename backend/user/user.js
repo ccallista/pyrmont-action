@@ -9,9 +9,7 @@ module.exports = {
           if(error) reject(error);
           resolve(hashedPassword);
         })
-      }
-
-      );
+      });
       
       
     },
