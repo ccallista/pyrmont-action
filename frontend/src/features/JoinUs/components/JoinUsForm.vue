@@ -1,6 +1,10 @@
+
+
+
 <script setup>
     import {handleError, ref} from 'vue'
     import joinUsService from '../services/joinUsAuthService'
+    import { reactive } from 'vue';
 
 
 
@@ -16,8 +20,21 @@
         {text: 'TAS', value: "TAS", placeholder: false}
 
     ])
-   
 
+    const signUpError = reactive({
+        emailError: false,
+        passwordError: false,
+        firstNameError: false,
+        lastNameError: false,
+        mobilePhoneError: false,
+        areaOfInterestError: false,
+        streetNameError: false,
+        cityError: false,
+        stateError: false,
+        postcodeError: false
+        
+    })
+  
 
     const signUpData = {
         email: '',
@@ -32,7 +49,6 @@
         postcode: null
     }
 
-    const signUpErrors = ref(false);
 
 
   
@@ -40,11 +56,26 @@
         try{
             signUpData.state = stateChosen.value;
             const response = await joinUsService.joinus(signUpData);
-            
+            const signUpResponse = await response.json();
+            console.log(signUpResponse)
+            signUpError.emailError= signUpError.passwordError = signUpError.firstNameError = signUpError.postcodeError = signUpError.stateError = signUpError.lastNameError = signUpError.cityError = signUpError.mobilePhoneError = false;
+            if(response.status === 400){
+                for(const error of signUpResponse.errors){
+                    if(error ==="email") signUpError.emailError = true;
+                    if(error ==="password") signUpError.passwordError = true;
+                    if(error ==="firstName") signUpError.firstNameError = true;
+                    if(error ==="lastName") signUpError.lastNameError = true;
+                    if(error ==="mobilePhone") signUpError.mobilePhoneError = true;
+                    if(error ==="city") signUpError.cityError = true;
+                    if(error ==="state") signUpError.stateError = true;
+                    if(error ==="postcode") signUpError.postcodeError = true;
+                    console.log(error);
 
+                }
+            }
         }
         catch(error){
-
+            console.log(error)
         }
      
     }
@@ -61,30 +92,30 @@
 
                     <h2>Login Details</h2>
                     <div class="login-details-section">
-                        <input type="email" id="email" placeholder="Email address" v-model="signUpData.email" required />
-                        <input type="password" id="password" placeholder="Password" v-model="signUpData.password" required />
+                        <input type="email" id="email" placeholder="Email address" v-model="signUpData.email" :class="{'error-border': signUpError.emailError}"/>
+                        <input type="password" id="password" placeholder="Password" v-model="signUpData.password" :class="{'error-border': signUpError.passwordError}" />
                     </div>
 
                     <h2>Personal Details</h2>
                     <div class="personal-details-section">
-                        <input type="text" id="first-name" v-model=signUpData.firstName placeholder="First Name" required />
-                        <input type="text" id="last-name" v-model=signUpData.lastName placeholder="Last Name" required />
-                        <input type="tel" id="mobile-phone" v-model=signUpData.mobilePhone placeholder="Mobile Phone" pattern="[0-9]{10}" required />
-                        <input type="text" v-model="signUpData.areaOfInterest" id="areaOfInterestTextArea" placeholder="Area of Interest" required>
+                        <input type="text" id="first-name" v-model=signUpData.firstName placeholder="First Name" :class="{'error-border': signUpError.firstNameError}" />
+                        <input type="text" id="last-name" v-model=signUpData.lastName placeholder="Last Name" :class="{'error-border': signUpError.lastNameError}" />
+                        <input type="tel" id="mobile-phone" v-model=signUpData.mobilePhone placeholder="Mobile Phone" :class="{'error-border': signUpError.mobilePhoneError}" pattern="[0-9]{10}" />
+                        <input type="text" v-model="signUpData.areaOfInterest" id="areaOfInterestTextArea" placeholder="Area of Interest">
                     </div>
 
                     <h2>Address Details</h2>
                     <div class="address-details-section">
-                        <input type="text" id="street-name" v-model=signUpData.streetName placeholder="Street Name" required />
-                        <input type="text" id="city" v-model=signUpData.city placeholder="City" required />
+                        <input type="text" id="street-name" v-model=signUpData.streetName placeholder="Street Name"/>
+                        <input type="text" id="city" :class="{'error-border': signUpError.cityError}" v-model=signUpData.city placeholder="City"/>
          
 
-                        <select v-model="stateChosen" id="state" required>
+                        <select v-model="stateChosen" id="state" :class="signUpError.stateError ? 'error-border' : 'input-valid'" required>
                             <option v-for="state in stateOptions" :value="state.value" :disabled=state.placeholder :hidden=state.placeholder :selected=state.placeholder>
                                 {{ state.text }}
                             </option>
                         </select>
-                        <input type="text" id="postcode" v-model=signUpData.postcode placeholder="Postcode" pattern="[0-9]{4}" required />
+                        <input type="text" id="postcode" v-model=signUpData.postcode placeholder="Postcode" pattern="[0-9]{4}" :class="{'error-border': signUpError.postcodeError}"/>
                     </div>
                     <button id="submitBtn" type="submit">Sign Up</button>
 
@@ -96,6 +127,12 @@
 </template>
 
 <style scoped>
+    .error-border{
+        border: 1px solid red;
+    }
+    .input-valid{
+        border: 1px solid #cbc8c8;
+    }
 
     .signup-container{
         height: 130vh;
@@ -157,6 +194,7 @@
         border-color: #cbc8c8;
         height: 35px
     }
+    
 
     h1{
         color: #0057B8;

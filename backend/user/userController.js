@@ -5,15 +5,14 @@ const userAuth = require('./userAuthentication')
 module.exports = {
     async register(req, res, db) {
         try{
-            const validateUser = await userAuth.inputValidatorJoinUs(req, res);
+            const validateUser = await userAuth.inputValidatorJoinUs(req, res, db);
             const hashedPassword = await user.hashPassword(req.body.password);
             userDetails = [req.body.email, hashedPassword, req.body.firstName, req.body.lastName, req.body.mobilePhone, req.body.areaOfInterest, req.body.streetName, req.body.city, req.body.state, req.body.postcode]
             await user.createUser(userDetails, db);
             res.status(200).json({ message: 'User Inserted successfully.'});
         }
         catch(error){
-            console.log(error);
-            return res.status(403).json({message: 'Error has occurred when registering', errors : error});
+            return res.status(400).json({message: 'Error has occurred when registering', errors : error});
         }
     },
 

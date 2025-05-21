@@ -27,7 +27,6 @@ module.exports = {
             const closedProject = await project.getClosedProjects(db);
             // Planned is to be removed here. 
             const plannedProject = await project.getPlannedProjects(db);
-            console.log(openProject)
             return res.status(200).json({openProjects: openProject, closedProjects: closedProject, plannedProjects: plannedProject});
 
         }
