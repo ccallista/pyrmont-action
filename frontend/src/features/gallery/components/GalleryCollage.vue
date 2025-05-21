@@ -8,19 +8,19 @@ const props = defineProps({ images: { type: Array, required: true } })
 const emit  = defineEmits(['select-image'])
 
 /* ---------- 1. build‑time image map ---------- */
-const modules = import.meta.glob('@/assets/Gallery/image_*.png',
+const modules = import.meta.glob('@/assets/Gallery/*',
     { eager: true, import: 'default' })
 
 const urls = Object.fromEntries(
     Object.entries(modules).map(([path, url]) => [
-      Number(path.match(/image_(\d+)\.png$/)[1]),   //   …/image_7.png → 7
+      (path.match(/[^/\\]+$/)[0]), 
       url
     ])
 )
 
 /* ---------- 2. events ---------- */
 function handleImageClick(img) {
-  emit('select-image', { ...img, src: urls[img.id] ?? placeholder })
+  emit('select-image', { ...img, src: urls[img.image_file_name] ?? placeholder })
 }
 
 function handleImageError(e) {
@@ -32,7 +32,7 @@ function handleImageError(e) {
   <div class="gallery-collage">
     <div
         v-for="(image, index) in images"
-        :key="image.id"
+        :key="image.image_id"
         class="collage-item"
         :style="{ '--animation-order': index }"
         role="button"
@@ -43,7 +43,7 @@ function handleImageError(e) {
         :aria-label="image.alt"
     >
       <img
-          :src="urls[image.id] ?? placeholder"
+          :src="urls[image.image_file_name] ?? placeholder"
           :alt="image.alt"
           class="collage-image"
           loading="lazy"
