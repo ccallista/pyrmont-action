@@ -9,7 +9,8 @@
       </div>
 
       <ul class="navigation">
-        <li><RouterLink class="link" :to="{ name: 'projects' }">Projects</RouterLink></li>
+        <li><RouterLink class="link" :to="{ name: 'projects', params: { projectType: 'open' }}">Projects</RouterLink></li>
+        <li><RouterLink class="link" :to="{ name: 'projects', params: { projectType: 'closed' }}">Closed Projects</RouterLink></li>
         <li><RouterLink class="link" :to="{ name: 'about'    }">About&nbsp;Us</RouterLink></li>
         <li><RouterLink class="link" :to="{ name: 'news'     }">News</RouterLink></li>
         <li><RouterLink class="link" :to="{ name: 'gallery'  }">Gallery</RouterLink></li>
