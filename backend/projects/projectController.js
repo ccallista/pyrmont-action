@@ -1,5 +1,26 @@
 const project = require('./projectModel');
 module.exports = {
+    async openProjects(req, res, db){
+        try{
+            const openProject = await project.getOpenProjects(db);
+            return res.status(200).json({projects: openProject, type: "open"});
+
+        }
+        catch(error){
+            return res.status(403).json({error: 'Error with the projects page'});
+        }
+    },
+
+    async closedProjects(req, res, db){
+        try{
+            const closedProject = await project.getClosedProjects(db);
+            return res.status(200).json({projects: closedProject, type:"closed"});
+
+        }
+        catch(error){
+            return res.status(403).json({error: 'Error with the projects page'});
+        }
+    }, 
 
     async getAllProjects(req, res, db) {
         try{
@@ -25,9 +46,6 @@ module.exports = {
             //      `)
             const openProject = await project.getOpenProjects(db);
             const closedProject = await project.getClosedProjects(db);
-            // Planned is to be removed here. 
-            const plannedProject = await project.getPlannedProjects(db);
-            console.log(openProject)
             return res.status(200).json({openProjects: openProject, closedProjects: closedProject, plannedProjects: plannedProject});
 
         }

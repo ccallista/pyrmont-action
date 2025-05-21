@@ -1,20 +1,27 @@
 // src/features/projects/routes.js
 export const projectsRoutes = [
+    
     {
         path: '/projects',
         component: () => import('./ProjectsLayout.vue'),
         children: [
             {
-                path: '',
+                path: ':projectType',
                 name: 'projects',
                 component: () => import('./pages/ProjectsView.vue'),
             },
         ],
     },
+    
 
     {
-        path: '/projects/:projectName',
-        name: 'individual projects',
-        component: () => import('./pages/IndividualProjectView.vue')
-    }
+        path: '/projects/:projectType',
+        children: [
+            {
+                path: ':projectName',
+                name: 'Individual Projects',
+                component: () => import('./pages/IndividualProjectView.vue'),
+            },
+        ],
+    },
 ]

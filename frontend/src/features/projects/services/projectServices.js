@@ -1,10 +1,13 @@
 import api from "../../../services/api"
 
 const projectsAPI = {    
-    viewProjects(){
-        return api.get("/api/getAllProject");
+    viewClosedProjects(){
+        return api.get("/api/getClosedProjects");
     },
     
+    viewOpenProjects(){
+        return api.get("/api/getOpenProjects");
+    },
     getIndividualProjects(projectName){
         return api.get("/api/projects/" + projectName);
     }
