@@ -17,6 +17,7 @@
         <CoreValues />
         <News />
         <Projects />
+        <BecomeMember />
     </div>
 </template>
 
@@ -26,10 +27,11 @@ import Slide from "../components/Slide.vue";
 import CoreValues from "../components/CoreValues.vue"
 import News from "../components/News.vue"
 import Projects from "../components/Projects.vue"
+import BecomeMember from "../components/BecomeMemberSection.vue"
 
 export default {
     name: "home",
-    components: { Carousel, Slide, CoreValues, News, Projects },
+    components: { Carousel, Slide, CoreValues, News, Projects, BecomeMember },
     setup() {
         const carouselSlides = ["carousel1", "carousel2", "carousel3", "carousel4"];
         const carouselHeader = ["Discover our new projects: <br> Blackwattle Bay Development!", "Discover our new projects: <br> Powerhouse!", "Discover our new projects: <br> New Sydney Waterfront!", "Discover our new projects: <br> West Metro!"]
