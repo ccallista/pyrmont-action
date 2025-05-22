@@ -16,7 +16,7 @@
             <li><RouterLink class="link" :to="{ name: 'projects', params: { projectType: 'closed' }}">Closed Projects</RouterLink></li>
           </ul>
         </li>
-        <li><RouterLink class="link" :to="{ name: 'about'    }">About&nbsp;Us</RouterLink></li>
+        <li><RouterLink class="link" :to="{ name: 'about'    }">About Us</RouterLink></li>
         <li><RouterLink class="link" :to="{ name: 'gallery'  }">Gallery</RouterLink></li>
         <li><RouterLink class="link" :to="{ name: 'contact'  }">Contact</RouterLink></li>
         <li><RouterLink class="link" :to="{ name: 'Join Us'  }">Join Us</RouterLink></li>
@@ -27,10 +27,9 @@
 </template>
 
 <script setup>
-// No script logic needed
 </script>
 
-<style scoped>
+<style lang="css">
 header {
   background-color: #fff;
   height: 85px;

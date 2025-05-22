@@ -247,7 +247,7 @@ textarea:focus {
 
 .submit-btn {
   width: 100%;
-  background-color: #3498db;
+  background-color: #EBBD6D;
   color: #fff;
   font-family: 'League Spartan', sans-serif;
   font-weight: 700;

@@ -135,7 +135,7 @@
 .blue-underline {
   width: 100px;
   height: 5px;
-  background-color: var(--primary-color);
+  background-color: #F6C88F;
   border: none;
   margin: 0 0 1rem 0;
 }

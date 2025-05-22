@@ -130,7 +130,7 @@ html, body {
 }
 
 .contact-icon svg path {
-  fill: #3498db;
+  fill: #EBBD6D;
 }
 
 .contact-card:hover .contact-icon svg {

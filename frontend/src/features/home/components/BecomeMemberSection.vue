@@ -8,7 +8,7 @@
       </p>
     </div>
     <div class="join-button-container">
-      <button class="join-button">Join Us</button>
+      <RouterLink class="join-button" :to="{ name: 'Join Us'  }">Join Us</RouterLink>
     </div>
   </section>
 </template>
@@ -62,7 +62,7 @@
   height: 100%;
 
   /* Dark gradient from pure black to dark gray */
-  background: linear-gradient(135deg, #000000 0%, #2c2c2c 100%);
+  background: linear-gradient(135deg, #222222 0%, #2c2c2c 100%);
 
   /* Wave-like clip path */
   clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 95%, 0 85%);
@@ -88,7 +88,7 @@
   line-height: 1.2;
 
   /* Subtle gradient text effect (unchanged) */
-  background: linear-gradient(90deg, #3498DB 0%, #6DD5FA 100%);
+  background: linear-gradient(90deg, #EBBD6D 0%, #FF8008  100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -111,8 +111,9 @@
 }
 
 .join-button {
+  text-decoration: none;
   position: relative;
-  background: linear-gradient(90deg, #3498DB 0%, #6DD5FA 100%);
+  background: linear-gradient(90deg, #EBBD6D 0%, #ecc278 100%);
   color: #fff;
   border: none;
   border-radius: 999px; /* pill shape */
@@ -123,14 +124,14 @@
   cursor: pointer;
 
   /* Soft glow & transitions */
-  box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+  box-shadow: 0 4px 10px rgba(235, 189, 109, 0.4);
   transition:
       transform 0.3s ease,
       box-shadow 0.3s ease;
 }
 
 .join-button:hover {
-  box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+  box-shadow:  0 8px 20px rgba(235, 174, 69, 0.6);
   transform: translateY(-2px);
   animation: pulse 1.5s infinite; /* Optional pulse animation on hover */
 }
@@ -145,13 +146,13 @@
 */
 @keyframes pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.5);
+    box-shadow: 0 0 0 0 rgba(235, 174, 69, 0.5);
   }
   70% {
-    box-shadow: 0 0 0 16px rgba(52, 152, 219, 0);
+    box-shadow: 0 0 0 16px rgba(235, 174, 69, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+    box-shadow: 0 0 0 0 rgba(235, 174, 69, 0);
   }
 }
 
