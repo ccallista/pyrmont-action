@@ -144,7 +144,7 @@
   line-height: 1.2;
 
   /* Subtle gradient text */
-  background: linear-gradient(90deg, #3498db 0%, #5dade2 50%, #76c7c0 100%);
+  background: linear-gradient(90deg, #D87E33 0%, #EBBD6D 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
@@ -154,7 +154,7 @@
 .blue-underline {
   width: 80px;
   height: 5px;
-  background-color: #3498db;
+  background-color: #F6C88F;
   border: none;
   margin: 0 0 1.5rem;
   transition: width 0.4s ease;
@@ -191,7 +191,7 @@
 .rules-section__image-background {
   position: relative;
   display: inline-block;
-  background: linear-gradient(135deg, #cce8ff 0%, #eaf3ff 100%);
+  background: linear-gradient(135deg, #ffe9d0 0%, #fff4e0 100%);
   padding: 1.5rem 2rem 2rem 1.5rem;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   border-radius: 1rem;

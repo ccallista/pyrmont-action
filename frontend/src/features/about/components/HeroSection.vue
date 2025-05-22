@@ -1,8 +1,6 @@
 <!-- Add this inside your main HTML file or a global style file to load fonts -->
-<link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&family=Roboto&display=swap"
-/>
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&family=Roboto&display=swap" />
 
 <template>
   <section class="hero-section fade-in">
@@ -11,20 +9,12 @@
 
     <!-- Left-side image -->
     <div class="hero-left-image-wrapper">
-      <img
-          :src="pyrmontView"
-          alt="Pyrmont view"
-          class="hero-left-image"
-      />
+      <img :src="pyrmontView" alt="Pyrmont view" class="hero-left-image" />
     </div>
 
     <!-- Right-side image -->
     <div class="hero-image-wrapper">
-      <img
-          :src="buildingImage"
-          alt="Pyrmont building"
-          class="hero-image"
-      />
+      <img :src="buildingImage" alt="Pyrmont building" class="hero-image" />
     </div>
 
     <!-- Glassmorphic content container -->
@@ -61,7 +51,8 @@ import pyrmontView from '@/assets/pyrmont-view.jpg'
 .hero-section {
   position: relative;
   width: 100%;
-  min-height: 650px; /* Slightly taller for emphasis */
+  min-height: 650px;
+  /* Slightly taller for emphasis */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,11 +86,9 @@ import pyrmontView from '@/assets/pyrmont-view.jpg'
   width: 100%;
   height: 100%;
   /* Subtle shifting gradient */
-  background: linear-gradient(
-      to bottom right,
+  background: linear-gradient(to bottom right,
       #f8fcff 0%,
-      #eef7fc 100%
-  );
+      #eef7fc 100%);
   background-size: 200% 200%;
   animation: gradientShift 10s ease-in-out infinite;
 
@@ -113,9 +102,11 @@ import pyrmontView from '@/assets/pyrmont-view.jpg'
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -157,11 +148,9 @@ import pyrmontView from '@/assets/pyrmont-view.jpg'
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-      to right,
+  background: linear-gradient(to right,
       rgba(255, 255, 255, 0.7),
-      rgba(255, 255, 255, 0.2)
-  );
+      rgba(255, 255, 255, 0.2));
   transition: opacity 0.4s ease;
 }
 
@@ -205,11 +194,9 @@ import pyrmontView from '@/assets/pyrmont-view.jpg'
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-      to left,
+  background: linear-gradient(to left,
       rgba(255, 255, 255, 0.7),
-      rgba(255, 255, 255, 0.2)
-  );
+      rgba(255, 255, 255, 0.2));
   transition: opacity 0.4s ease;
 }
 
@@ -218,6 +205,7 @@ import pyrmontView from '@/assets/pyrmont-view.jpg'
 }
 
 @media (max-width: 992px) {
+
   /* Hide both images on smaller screens or adjust how they stack */
   .hero-left-image-wrapper,
   .hero-image-wrapper {
@@ -232,7 +220,8 @@ import pyrmontView from '@/assets/pyrmont-view.jpg'
 */
 .hero-content {
   position: relative;
-  z-index: 4; /* Above both images */
+  z-index: 4;
+  /* Above both images */
   max-width: 1200px;
   width: 100%;
   display: flex;
@@ -262,7 +251,7 @@ import pyrmontView from '@/assets/pyrmont-view.jpg'
   font-family: 'League Spartan', sans-serif;
   font-size: 24px;
   font-weight: 700;
-  color: #3498db;
+  color: #EBBD6D;
   margin-bottom: 0.5rem;
 }
 
@@ -284,7 +273,7 @@ import pyrmontView from '@/assets/pyrmont-view.jpg'
 
 /* CTA Button */
 .hero-cta-button {
-  background-color: #3498db;
+  background-color: #EBBD6D;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -297,7 +286,7 @@ import pyrmontView from '@/assets/pyrmont-view.jpg'
 }
 
 .hero-cta-button:hover {
-  background-color: #2c82c9;
+  background-color: #ebae45;
   box-shadow: 0 6px 16px rgba(52, 152, 219, 0.4);
 }
 
@@ -315,7 +304,8 @@ import pyrmontView from '@/assets/pyrmont-view.jpg'
   height: 150px;
   z-index: 5;
   /* We'll insert the wave mask via pseudo-element */
-  background: none; /* Clear out any old background */
+  background: none;
+  /* Clear out any old background */
 }
 
 /* Mask-based wave gradient fill */
@@ -347,12 +337,15 @@ import pyrmontView from '@/assets/pyrmont-view.jpg'
   .hero-title {
     font-size: 36px;
   }
+
   .hero-subtitle {
     font-size: 20px;
   }
+
   .hero-description {
     font-size: 16px;
   }
+
   .hero-text-box {
     margin: 0 1rem;
   }

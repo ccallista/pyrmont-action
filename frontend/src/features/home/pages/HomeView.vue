@@ -1,61 +1,58 @@
 <template>
-    <div class="home">
-        <Carousel class="carousel" v-slot="{ currentSlide }">
-            <Slide v-for="(slide, index) in carouselSlides" :key="index">
+    <div class="home float-in">
+        <Carousel v-if="isLoaded" class="carousel" v-slot="{ currentSlide }">
+            <Slide v-for="(projectItem, index) in project" :key="index">
                 <div v-show="currentSlide === index + 1" class="slide-info">
-                    <img :src="getImagePath(slide)" alt="image" />
-                    <container class="overlay">
-                        <h1 class="overlay-header" v-html="getHeader(index)"></h1>
-                        <p class="overlay-desc">{{ getDescription(index) }}</p>
+                    <img :src="`/src/assets/Projects/${projectItem.project_image}`" alt="image" />
+                    <div class="overlay">
+                        <h1 class="overlay-header">{{ projectItem.project_name }}</h1>
                         <ul class="button">
-                            <li><router-link class="link" :to="{ name: getLink(index) }">LEARN MORE</router-link></li>
+                            <li><router-link class="link" :to="{
+                                name: 'Individual Projects', params: {
+                                    projectType: projectItem.project_type,
+                                    projectName: projectItem.project_name
+                                }
+                            }">LEARN MORE</router-link></li>
                         </ul>
-                    </container>
+                    </div>
                 </div>
-            </Slide>
+        </Slide>
         </Carousel>
-        <CoreValues />
-        <News />
-        <Projects />
+    <CoreValues />
+    <BecomeMember />
     </div>
 </template>
 
-<script>
+<script setup>
 import Carousel from "../components/Carousel.vue";
 import Slide from "../components/Slide.vue";
 import CoreValues from "../components/CoreValues.vue"
-import News from "../components/News.vue"
-import Projects from "../components/Projects.vue"
+import BecomeMember from "../components/BecomeMemberSection.vue"
 
-export default {
-    name: "home",
-    components: { Carousel, Slide, CoreValues, News, Projects },
-    setup() {
-        const carouselSlides = ["carousel1", "carousel2", "carousel3", "carousel4"];
-        const carouselHeader = ["Discover our new projects: <br> Blackwattle Bay Development!", "Discover our new projects: <br> Powerhouse!", "Discover our new projects: <br> New Sydney Waterfront!", "Discover our new projects: <br> West Metro!"]
-        const carouselDescription = ["description1", "description2", "description3", "description4"]
-        const carouselLink = ["", "", "", ""]
+import { ref, onMounted } from 'vue';
+import projects from "../../projects/services/projectServices"
+const project = ref([]);
+let response;
+const isLoaded = ref(false);
 
-        const getImagePath = (slide) => {
-            return new URL(`../../../assets/${slide}.jpg`, import.meta.url).href;
-        };
-        const getHeader = (index) => {
-            return carouselHeader[index]
-        }
-        const getDescription = (index) => {
-            return carouselDescription[index]
-        }
-        const getLink = (index) => {
-            return carouselLink[index]
-        }
-
-        return { carouselSlides, getImagePath, getHeader, getDescription, getLink };
-    },
-};
+onMounted(async () => {
+  try {
+    response = await projects.viewOpenProjects();
+    const projectData = await response.json();
+    project.value = projectData.projects.slice(-4);
+    isLoaded.value = true;
+  } catch (error) {
+    console.error("Error loading projects:", error);
+  }
+});
 </script>
 
 
 <style lang="css" scoped>
+.float-in {
+  animation: floatIn 0.6s ease-out;
+}
+
 .carousel {
     position: relative;
     max-height: 100vh;
@@ -123,5 +120,16 @@ export default {
 
 .carousel .link:hover {
     background-color: #ebae45;
+}
+
+@keyframes floatIn {
+  0% {
+    opacity: 0;
+    transform: translateY(8%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>

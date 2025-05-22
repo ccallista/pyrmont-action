@@ -185,8 +185,8 @@
 .objective-item:focus-within,
 .objective-item:active {
   transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 0 15px rgba(52, 152, 219, 0.3),
-  0 0 30px rgba(52, 152, 219, 0.15);
+  box-shadow: 0 0 15px rgba(235, 189, 109, 0.3),
+              0 0 30px rgba(235, 189, 109, 0.15);
 }
 
 /* Optional glowing outline on hover */
@@ -195,7 +195,7 @@
   position: absolute;
   inset: 0;
   border-radius: 1rem;
-  box-shadow: 0 0 20px rgba(52, 152, 219, 0.2);
+  box-shadow: 0 0 20px rgba(235, 189, 109, 0.2);
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
   pointer-events: none;

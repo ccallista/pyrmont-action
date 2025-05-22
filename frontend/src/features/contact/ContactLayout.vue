@@ -1,17 +1,11 @@
 <!-- src/layouts/ContactLayout.vue -->
 <template>
   <div class="contact-layout">
-    <header class="contact-header"></header>
 
     <main class="contact-main">
       <router-view />
     </main>
 
-    <footer class="contact-footer">
-      <p class="footer-text">
-        © {{ new Date().getFullYear() }} Pyrmont. All Rights Reserved.
-      </p>
-    </footer>
   </div>
 </template>
 
@@ -43,6 +37,7 @@
   flex: 1;
   margin: 0;
   padding: 0;
+  padding-bottom: 3%;
 }
 
 /* FOOTER */

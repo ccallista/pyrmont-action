@@ -181,14 +181,14 @@ defineProps({
   font-weight: 600;
   font-size: 0.95rem;
   text-decoration: none;
-  color: #0077b6;
+  color: #EBBD6D;
   border-bottom: 1px solid transparent;
   transition: border-color 0.3s ease, color 0.3s ease;
 }
 
 .project-card__link:hover {
-  color: #005c87; /* slightly darker color on hover */
-  border-color: #005c87;
+  color: #ebae45; /* slightly darker color on hover */
+  border-color: #ebae45;
 }
 
 .arrow {

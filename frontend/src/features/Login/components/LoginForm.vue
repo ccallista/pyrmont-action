@@ -177,7 +177,7 @@ import loginAuthenticationService from '../services/loginAuthServices'
 
     #submitBtn{
         position: relative;
-        background-color: #3498DB;
+        background-color: #ebae45;
         border: 0px;
         color: #FFFF;
         border-radius: 3px;
