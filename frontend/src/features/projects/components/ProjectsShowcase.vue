@@ -7,7 +7,7 @@
     <div class="showcase__content">
       <!-- Left Text Column -->
       <div class="showcase__text-block">
-        <h2 class="showcase__title">OUR PROJECTS</h2>
+        <h2 class="showcase__title">OUR {{projectType}} PROJECTS</h2>
         <p class="showcase__desc">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nunc ipsum,
           pulvinar quis porttitor at, bibendum ut turpis. Etiam porttitor, elit eu
@@ -70,6 +70,13 @@
 </template>
 
 <script setup>
+defineProps({
+    projectType: {
+        type: String,
+        required: true
+    }
+});
+
 import treeImage from '@/assets/Projects/pyrmont_tree.png'
 import workersImage from '@/assets/Projects/pyrmont_project_manager.png'
 </script>
@@ -185,6 +192,7 @@ import workersImage from '@/assets/Projects/pyrmont_project_manager.png'
   -webkit-text-fill-color: transparent;
   /* subtle text shadow for extra pop */
   text-shadow: 0 2px 2px rgba(0,0,0,0.1);
+  text-transform: uppercase;
 }
 
 .showcase__desc {

@@ -1,9 +1,32 @@
+<template>
+    <div class="project-individual float-in">
+        <div class="back-button">
+            <RouterLink class="link" :to="{ name: 'projects' }"><< {{route.params.projectType}} projects</RouterLink>
+        </div>
+        <div class="project-individual-title">
+            <div class="project-individual-title-text">
+                <h2 class="project-individual-header"> {{individualProject.project_name }}</h2>
+                <p class="project-individual-date"> <i class="fa-solid fa-calendar-days"></i>  {{ individualProject.project_date }}</p>
+            </div>
+            <img :src="`/src/assets/Projects/${individualProject.project_image}`" alt="project Image" />
+        </div>
+        <div class="project-individual-body">
+            <div class="project-individual-details"><ProjectIndividualDetails :individualProject="individualProject"/></div>
+            <div class="project-list"><ProjectList :projects="relatedProjects" :projectType="individualProject.project_type"/></div>
+        </div>
+    </div>
+</template>
+
+
 <script setup>
     import { ref, watch } from 'vue';
     import { useRoute } from 'vue-router'
+    import ProjectIndividualDetails from '@/features/projects/components/ProjectIndividualDetails.vue';
+    import ProjectList from '@/features/projects/components/ProjectList.vue';
 
     import projects from "../services/projectServices"
-    const individualProject = ref([])
+    const individualProject = ref({});
+    const relatedProjects = ref([]);
     const route = useRoute();
     watch(() => route.params.projectName, fetchData, {immediate: true})
 
@@ -13,7 +36,19 @@
             const response = await projects.getIndividualProjects(id);
             const projectData = await response.json();
             individualProject.value = projectData.project;
-            console.log(individualProject.value)
+
+            let listResponse;
+            if (individualProject.value.project_type === 'open') {
+                listResponse = await projects.viewOpenProjects();
+            } else if (individualProject.value.project_type === 'closed') {
+                listResponse = await projects.viewClosedProjects();
+            }
+
+            const listData = await listResponse.json();
+
+            relatedProjects.value = listData.projects.filter(
+                p => p.project_name !== individualProject.value.project_name
+            ).slice(-3);
         }
 
         catch(error){
@@ -24,37 +59,80 @@
 
 </script>
 
+<style lang="css">
+.float-in {
+  animation: floatIn 0.6s ease-out;
+}
 
-<template>
-    <div class="left-container">
-        <div class="content">
-            <img class="image-top" :src="`/src/assets/Projects/${individualProject.project_image}`" alt='project image'/>
-            <h1 class="projectName-heading">{{ individualProject.project_name }}</h1>
-            <p> {{ individualProject.project_description }} </p>
-        </div>
-    </div>
-</template>
+.project-individual {
+    padding: 2% 6%
+}
 
-<style>
-    .left-container{
-        width: 65vw;
-        display: flex;
-        flex-direction: column;
-        
-    }
-    .content{
-        padding-top: 20px;
-        padding-left: 30px;
-    }
-    .image-top{
-        width: 100%;
-        height:550px;
-        padding-bottom: 35px
-    }
+.project-individual img{
+    padding-top: 3%;
+    width: 100%;
+}
 
-    .projectName-heading{
-        font-family: Inter;
-    }
-    
+.project-individual-title {
+    display: flex;
+    align-items: center;
+    gap: 2%''
+}
 
+.project-individual-title img{
+    width: 70vw;
+    margin-left: auto;
+}
+
+.project-individual-title-text{
+    width: 50vw;
+}
+
+.project-individual-header {
+    font-family: 'Inter', sans-serif;
+    font-weight: 200;
+    text-transform: uppercase;
+}
+
+.project-individual-date {
+    opacity: 50%;
+}
+
+.back-button .link {
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #EBBD6D;
+    border-bottom: 2px solid transparent;
+}
+
+.project-individual .link:hover {
+    color: #EBAE45;
+    border-color: #EBAE45;
+}
+
+.project-individual-body {
+    display: flex;
+    gap: 5%
+}
+
+.project-individual-details {
+    flex: 65%;
+}
+
+.project-list {
+    flex: 30%;
+}
+
+@keyframes floatIn {
+  0% {
+    opacity: 0;
+    transform: translateY(8%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 </style>
