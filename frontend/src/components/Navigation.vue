@@ -9,9 +9,14 @@
       </div>
 
       <ul class="navigation">
-        <li><RouterLink class="link" :to="{ name: 'projects' }">Projects</RouterLink></li>
+        <li class="dropdown">
+          <span class="link">Projects ▾</span>
+          <ul class="dropdown-menu">
+            <li><RouterLink class="link" :to="{ name: 'projects', params: { projectType: 'open' }}">Open Projects</RouterLink></li>
+            <li><RouterLink class="link" :to="{ name: 'projects', params: { projectType: 'closed' }}">Closed Projects</RouterLink></li>
+          </ul>
+        </li>
         <li><RouterLink class="link" :to="{ name: 'about'    }">About&nbsp;Us</RouterLink></li>
-        <li><RouterLink class="link" :to="{ name: 'news'     }">News</RouterLink></li>
         <li><RouterLink class="link" :to="{ name: 'gallery'  }">Gallery</RouterLink></li>
         <li><RouterLink class="link" :to="{ name: 'contact'  }">Contact</RouterLink></li>
         <li><RouterLink class="link" :to="{ name: 'Join Us'  }">Join Us</RouterLink></li>
@@ -114,5 +119,22 @@ nav .navigation {
     align-items: center;
     flex: 1;
     justify-content: flex-end;
+}
+
+nav .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  list-style: none;
+  z-index: 1000;
+}
+
+nav .dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+nav .dropdown-menu li {
+  padding: 8% 8%;
 }
 </style>

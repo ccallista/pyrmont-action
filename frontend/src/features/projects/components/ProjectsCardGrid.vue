@@ -1,7 +1,7 @@
 <template>
   <section class="projects-grid-section">
     <!-- Section Heading -->
-    <h2 class="projects-grid-heading">{{ heading }}</h2>
+    <!-- <h2 class="projects-grid-heading">{{ heading }}</h2> -->
 
     <!-- Projects Grid -->
     <div class="projects-grid">
@@ -30,7 +30,7 @@
 
           <!-- Learn More Link -->
 
-          <a :href="`/projects/${project.project_name}`" class="project-card__link">
+          <a :href="`/projects/${project.project_type}/${project.project_name}`" class="project-card__link">
             LEARN MORE
             <span class="arrow">→</span>
           </a>
@@ -42,10 +42,10 @@
 
 <script setup>
 defineProps({
-  heading: {
-    type: String,
-    default: 'Projects'
-  },
+  // heading: {
+  //   type: String,
+  //   default: 'Projects'
+  // },
   projects: {
     type: Array,
     default: () => []

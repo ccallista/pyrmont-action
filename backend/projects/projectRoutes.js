@@ -1,9 +1,15 @@
 const projectController = require('./projectController') 
 const router = require('express').Router();
 
-router.get('/api/getAllProject', function(req, res){
-    projectController.getAllProjects(req, res, req.db);
+router.get('/api/getOpenProjects', function(req, res){
+    projectController.openProjects(req, res, req.db);
 })
+
+router.get('/api/getClosedProjects', function(req, res){
+    projectController.closedProjects(req, res, req.db);
+})
+
+
 
 router.get('/api/projects/:projectName', function(req, res){
     
