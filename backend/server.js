@@ -3,6 +3,7 @@ const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
 const newsModel = require('./news/newsModel');
 const newsRoutes = require('./news/newsRoutes');
+require('dotenv').config();
 
 const app = express();
 
@@ -65,6 +66,7 @@ db.exec(`
 
 const userRouter = require('./user/userRoutes')
 const projectRoutes = require('./projects/projectRoutes')
+const contactFormRouter = require('./contact-form/contactRoute')
 const galleryRouter = require('./gallery/galleryRoutes')
 app.use("", function(req, res, next) {
   req.db = db;
@@ -83,44 +85,19 @@ app.use("", function(req, res, next) {
 }, galleryRouter);
 
 
+app.use("", function(req, res, next) {
+  req.db = db;
+  next();
+}, contactFormRouter);
+
+
 newsModel(db);
 
 app.use('/api/news', newsRoutes(db));
-
-// // GET all users
-// app.get('/api/users', (req, res) => {
-//   db.all('SELECT * FROM users', [], (err, rows) => {
-//     if (err) return res.status(500).json({ error: err.message });
-//     res.json(rows);
-//   });
-// });
-
-// // POST add new user
-// app.post('/api/users', (req, res) => {
-//   const { username } = req.body;
-//   if (!username) {
-//     return res.status(400).json({ error: 'Username is required.' });
-//   }
-//   db.run('INSERT INTO users (username) VALUES (?)', [username], function (err) {
-//     if (err) return res.status(500).json({ error: err.message });
-//     // 'this.lastID' is the newly inserted row ID
-//     res.json({ id: this.lastID, username });
-//   });
-// });
-
-// // DELETE user
-// app.delete('/api/users/:id', (req, res) => {
-//   const userId = req.params.id;
-//   db.run('DELETE FROM users WHERE id = ?', [userId], function (err) {
-//     if (err) return res.status(500).json({ error: err.message });
-//     if (this.changes === 0) {
-//       return res.status(404).json({ error: 'User not found.' });
-//     }
-//     res.json({ message: 'User deleted successfully.' });
-//   });
-// });
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`);
 });
+
+

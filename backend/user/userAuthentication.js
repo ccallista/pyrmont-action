@@ -1,5 +1,8 @@
 const jwttokens = require('jsonwebtoken')
+require('dotenv').config()
+const user = require('./user')
 module.exports = {
+
     
     stateRegex : function(input){
         stateRegex = new RegExp(/(NSW|WA|VIC|NT|QLD|TAS|SA)/)
@@ -28,12 +31,24 @@ module.exports = {
     },
 
 
-    async inputValidatorJoinUs(req, res){
-        return new Promise((resolve, reject) => {
+
+    async inputValidatorJoinUs(req, res, db){
+        return new Promise(async (resolve, reject) => {
             const inputErrors = [];
+            if (module.exports.emailRegex(req.body.email)){
+                try{
+                    await user.getCheckUserExists(req.body.email, db);
+                }
+                catch(error){
+                    inputErrors.push("email")
+                }
+            }
+            else{
+                inputErrors.push("email");
+            }
+
             if (!module.exports.stateRegex(req.body.state)) inputErrors.push("state");
-            if (!module.exports.emailRegex(req.body.email)) inputErrors.push("email");
-            if (!module.exports.phoneNumberRegex(req.body.phoneNumber)) inputErrors.push("phoneNumber");
+            if (!module.exports.phoneNumberRegex(req.body.mobilePhone)) inputErrors.push("mobilePhone");
             if (!module.exports.postcodeRegex(req.body.postcode)) inputErrors.push("postcode");
             if (!module.exports.stringedRegex(req.body.firstName)) inputErrors.push("firstName");
             if (!module.exports.stringedRegex(req.body.lastName)) inputErrors.push("lastName");
@@ -58,11 +73,11 @@ module.exports = {
 
 
     async generateAccessToken(userEmail){
-        return jwttokens.sign({email: userEmail}, 'accesstoken', {expiresIn: '120s'})
+        return jwttokens.sign({email: userEmail}, process.env.ACCESS_TOKEN, {expiresIn: '120s'})
     },
 
     async generateRefreshToken(userEmail){
-        return jwttokens.sign({email: userEmail}, 'refreshToken', {expiresIn: '86400s'})
+        return jwttokens.sign({email: userEmail}, process.env.REFRESH_TOKEN, {expiresIn: '86400s'})
     },
 
 

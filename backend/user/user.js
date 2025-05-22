@@ -18,7 +18,10 @@ module.exports = {
       return new Promise((resolve, reject) => {
         query = 'INSERT INTO users (email, password, firstName, lastName, mobilePhone, areaOfInterest, streetName, city, state, postcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         db.run(query, data, function(error){
-          if (error) reject("Caused from creating a new user: " + error);
+          if(error){
+            if (error.message.includes("UNIQUE constraint failed")) reject(["email"])
+            reject("Invalid details");
+          }
           resolve();
         }
       )        
@@ -34,6 +37,19 @@ module.exports = {
         db.get(query, [email], (error, result) => {
           if (error) reject("Caused from searching users: " + error);
           resolve(result);
+
+        });
+        
+      })
+    },
+
+    async getCheckUserExists(email, db){
+      return new Promise((resolve, reject) => {
+        query = "SELECT COUNT(*) as count FROM users WHERE email = ?"
+        db.get(query, [email], (error, result) => {
+          if (error) reject("Caused from searching users: " + error);
+          if(result.count !== 0) reject(["email"]);
+          resolve();
 
         });
         
