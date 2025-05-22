@@ -33,7 +33,7 @@ module.exports = {
             const inputErrors = [];
             if (!module.exports.stateRegex(req.body.state)) inputErrors.push("state");
             if (!module.exports.emailRegex(req.body.email)) inputErrors.push("email");
-            if (!module.exports.phoneNumberRegex(req.body.phoneNumber)) inputErrors.push("phoneNumber");
+            if (!module.exports.phoneNumberRegex(req.body.mobilePhone)) inputErrors.push("mobilePhone");
             if (!module.exports.postcodeRegex(req.body.postcode)) inputErrors.push("postcode");
             if (!module.exports.stringedRegex(req.body.firstName)) inputErrors.push("firstName");
             if (!module.exports.stringedRegex(req.body.lastName)) inputErrors.push("lastName");
@@ -57,12 +57,12 @@ module.exports = {
 
 
 
-    async generateAccessToken(userEmail){
-        return jwttokens.sign({email: userEmail}, 'accesstoken', {expiresIn: '120s'})
+    async generateAccessToken(userEmail, roleIndividual){
+        return jwttokens.sign({email: userEmail, role: roleIndividual}, 'accesstoken', {expiresIn: '120s'})
     },
 
-    async generateRefreshToken(userEmail){
-        return jwttokens.sign({email: userEmail}, 'refreshToken', {expiresIn: '86400s'})
+    async generateRefreshToken(userEmail, roleIndividual){
+        return jwttokens.sign({email: userEmail, role: roleIndividual}, 'refreshToken', {expiresIn: '86400s'})
     },
 
 

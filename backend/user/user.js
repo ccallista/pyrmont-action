@@ -16,7 +16,7 @@ module.exports = {
 
     async createUser(data, db){
       return new Promise((resolve, reject) => {
-        query = 'INSERT INTO users (email, password, firstName, lastName, mobilePhone, areaOfInterest, streetName, city, state, postcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        query = 'INSERT INTO users (email, password, firstName, lastName, mobilePhone, areaOfInterest, streetName, city, state, postcode, role_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         db.run(query, data, function(error){
           if (error) reject("Caused from creating a new user: " + error);
           resolve();
@@ -30,7 +30,7 @@ module.exports = {
 
     async getUser(email, db){
       return new Promise((resolve, reject) => {
-        query = "SELECT email, password FROM users WHERE email = ?"
+        query = "SELECT email, password, role_id FROM users WHERE email = ?"
         db.get(query, [email], (error, result) => {
           if (error) reject("Caused from searching users: " + error);
           resolve(result);

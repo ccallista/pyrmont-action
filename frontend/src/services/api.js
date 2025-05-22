@@ -20,7 +20,6 @@ const api = {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                
                 body: JSON.stringify(data),
                 
             })
@@ -31,6 +30,8 @@ const api = {
             console.error('Error caused from POST Request:' + error)
         }
     }
+
+    
 }
 
 export default api;

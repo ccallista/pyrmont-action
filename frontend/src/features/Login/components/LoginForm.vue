@@ -1,20 +1,27 @@
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import loginAuthenticationService from '../services/loginAuthServices'
     const loginInput = {
         email: '',
         password: ''
     }
+    const router = useRouter();
     const loginErrors = ref(false);
 
     const handleSubmit = async() => {
         try{
             const response = await loginAuthenticationService.login(loginInput);
             loginErrors.value = response.ok ? false : true;
-            response.json().then(data => {
-                localStorage.setItem('accessToken', data.accessToken);
-                localStorage.setItem('refreshToken', data.refreshToken);      
-            });
+            const details = await response.json();
+            if(details.role === 0){
+                await router.push('/admin')
+            }
+            else if(details.role === 1){
+                await router.push('/member')
+            }
+
+
 
         }
         catch(error){
