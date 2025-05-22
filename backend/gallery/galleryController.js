@@ -13,7 +13,7 @@ module.exports = {
                 //     (4, 'image_4.png', 'Caption for Image 4', 'Description for gallery image 4'),
                 //     (5, 'image_5.png', 'Caption for Image 5', 'Description for gallery image 5'),
                 //     (6, 'image_6.png', 'Caption for Image 6', 'Description for gallery image 6'),
-                //     (7, 'image_7.png', 'Caption for Image 7', 'Description for gallery image 7')
+                //     (7, 'image_7.png', 'Caption for Image 7', 'Description for gallery image 7'),
                 // (8, 'header_image.png', 'Caption for Image 8', 'Description for gallery image 8')
                 //  `)
             res.status(200).json({message: 'Successful images', images: allImageData})
