@@ -1,6 +1,6 @@
 <template>
   <div class="projects-page">
-    <ProjectsShowcase />
+    <ProjectsShowcase :projectType="route.params.projectType"/>
     <FilterBar />
 
     <ProjectsCardGrid
