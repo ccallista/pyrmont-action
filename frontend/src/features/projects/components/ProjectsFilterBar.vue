@@ -51,8 +51,8 @@
   box-sizing: border-box;
   overflow: hidden;
 
-  /* Soft blue gradient background */
-  background: linear-gradient(135deg, #f0faff 0%, #eef7fc 100%);
+  /* Warm golden gradient background */
+  background: linear-gradient(135deg, #fff6ea 0%, #fce8c5 100%);
 
   /* Box shadow for depth, plus a subtle lift on hover */
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
@@ -93,7 +93,7 @@
   left: 0;
   width: 100%;
   height: 120px;
-  background: linear-gradient(135deg, #f0faff 0%, #eef7fc 100%);
+  background: linear-gradient(135deg, #fff6ea 0%, #fce8c5 100%);
   mask: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1440 320' xmlns='http://www.w3.org/2000/svg'><path fill='%23000000' d='M0,224L80,213.3C160,203,320,181,480,186.7C640,192,800,224,960,224C1120,224,1280,192,1360,176L1440,160L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z'></path></svg>");
   mask-repeat: no-repeat;
   mask-size: cover;
@@ -112,13 +112,13 @@
   position: relative;
   z-index: 3; /* above swirl overlay */
 
-  /* Blue gradient text */
-  background: linear-gradient(to right, #3498db 0%, #72c4e5 100%);
+  /* Golden gradient text */
+  background: linear-gradient(to right, #EBBD6D 0%, #f3c98d 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
   /* Soft glow around the text */
-  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.15), 0 0 8px rgba(52, 152, 219, 0.2);
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.15), 0 0 8px rgba(203, 144, 73, 0.2);
 }
 
 /* ---------------------------------------------------
@@ -135,10 +135,10 @@
 /* Individual Buttons */
 .filter-btn {
   padding: 0.6rem 1.2rem;
-  border: 2px solid #3498db;
+  border: 2px solid #EBBD6D;
   border-radius: 6px;
   background-color: transparent;
-  color: #3498db;
+  color: #EBBD6D;
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 0.95rem;
@@ -150,9 +150,9 @@
       transform 0.3s ease;
 }
 .filter-btn:hover {
-  background-color: #3498db;
-  color: #fff;
-  box-shadow: 0 3px 10px rgba(52, 152, 219, 0.15);
+  background-color: #EBBD6D;
+  color: #fff8ef;
+  box-shadow: 0 3px 10px rgba(203, 144, 73, 0.15);
   transform: translateY(-1px);
 }
 
@@ -182,4 +182,5 @@
     font-size: 0.9rem;
   }
 }
+
 </style>

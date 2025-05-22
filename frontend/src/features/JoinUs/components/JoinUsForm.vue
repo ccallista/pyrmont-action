@@ -173,7 +173,7 @@
 
 
     h2{
-      color: #3498DB;
+      color: #EBBD6D;
       font-size: large;
       margin-bottom: 0px;
     }
@@ -197,7 +197,7 @@
     
 
     h1{
-        color: #0057B8;
+        color: #ebae45;
         margin-bottom: 30px;
     }
   
@@ -247,7 +247,7 @@
 
     #submitBtn{
         position: relative;
-        background-color: #3498DB;
+        background-color: #ebae45;
         border: 0px;
         color: #FFFF;
         border-radius: 3px;

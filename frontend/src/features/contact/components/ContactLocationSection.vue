@@ -135,7 +135,7 @@
 
 .location-info h2 {
   font-size: 2rem;
-  color: #3498db;
+  color: #EBBD6D;
   margin: 0.25rem 0 1.5rem;
   position: relative;
 }
@@ -145,7 +145,7 @@
   display: block;
   width: 50px;
   height: 4px;
-  background-color: #3498db;
+  background-color: #EBBD6D;
   margin-top: 0.5rem;
   border-radius: 2px;
 }

@@ -7,9 +7,6 @@
       <router-view />
     </main>
 
-    <footer class="about-footer">
-      <p class="footer-text">© {{ new Date().getFullYear() }} Pyrmont. All Rights Reserved.</p>
-    </footer>
   </div>
 </template>
 

@@ -99,7 +99,7 @@ import workersImage from '@/assets/Projects/pyrmont_project_manager.png'
   --color-bg-gradient-end: #d3f3ff;
 
   --color-text-dark: #2a2a2a;
-  --color-text-accent: #023e8a;
+  --color-text-accent: #EBBD6D;
 
   --color-white-overlay: rgba(255, 255, 255, 0.3);
   --color-black-overlay: rgba(0, 0, 0, 0.3);
@@ -187,7 +187,7 @@ import workersImage from '@/assets/Projects/pyrmont_project_manager.png'
   font-size: 2.2rem;
   letter-spacing: 1px;
   margin: 0 0 1rem;
-  background: linear-gradient(to right, #03045e, #0077b6);
+  background: linear-gradient(to right, #EBBD6D, #ecc278);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   /* subtle text shadow for extra pop */

@@ -45,7 +45,7 @@
   height: 300px;
   overflow: hidden;
   margin-bottom: 3rem;
-  background-color: #08324E;
+  background-color: #EBBD6D; /* main tone */
 }
 
 .gallery-banner::before {
@@ -70,8 +70,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3)),
-  radial-gradient(circle at center, rgba(255,255,255,0.05), transparent 80%);
+  background: linear-gradient(rgba(235, 189, 109, 0.3), rgba(235, 189, 109, 0.2)),
+              radial-gradient(circle at center, rgba(255, 255, 255, 0.08), transparent 80%);
   pointer-events: none;
   z-index: 2;
   transition: background 0.5s ease-out;
@@ -83,7 +83,7 @@
   left: 0;
   bottom: 0;
   width: 40%;
-  background: linear-gradient(135deg, rgba(8,50,78,0.95), rgba(10, 60, 90, 0.85));
+  background: linear-gradient(135deg, rgba(235, 189, 109, 0.9), rgba(208, 137, 39, 0.9));
   clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
   display: flex;
   align-items: center;
@@ -91,7 +91,7 @@
   box-sizing: border-box;
   z-index: 3;
   backdrop-filter: blur(3px);
-  box-shadow: inset 3px 0 8px rgba(255, 255, 255, 0.05), 0 5px 15px rgba(0,0,0,0.2);
+  box-shadow: inset 3px 0 8px rgba(255, 255, 255, 0.1), 0 5px 15px rgba(0, 0, 0, 0.15);
   animation: slideFadeInLeft 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s backwards;
   transition: background 0.4s ease-out, transform 0.4s ease-out;
 }
@@ -104,7 +104,7 @@
   line-height: 1.1;
   letter-spacing: 1.5px;
   color: #fff;
-  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.4);
+  text-shadow: 3px 3px 8px rgba(140, 75, 0, 0.4);
   animation: fadeIn 1.2s ease-out 0.6s backwards;
   transition: transform 0.4s ease-out;
 }
@@ -114,8 +114,8 @@
 }
 
 .gallery-banner:hover::after {
-  background: linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.2)),
-  radial-gradient(circle at center, rgba(255,255,255,0.08), transparent 85%);
+  background: linear-gradient(rgba(235, 189, 109, 0.2), rgba(235, 189, 109, 0.1)),
+              radial-gradient(circle at center, rgba(255, 255, 255, 0.1), transparent 85%);
 }
 
 @media (max-width: 992px) {
