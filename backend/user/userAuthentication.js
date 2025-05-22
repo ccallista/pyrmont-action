@@ -30,6 +30,8 @@ module.exports = {
         return nameOrCityRegex.test(input);
     },
 
+    
+
 
 
     async inputValidatorJoinUs(req, res, db){
@@ -54,6 +56,12 @@ module.exports = {
             if (!module.exports.stringedRegex(req.body.firstName)) inputErrors.push("firstName");
             if (!module.exports.stringedRegex(req.body.lastName)) inputErrors.push("lastName");
             if (!module.exports.stringedRegex(req.body.city)) inputErrors.push("city");
+            if (!module.exports.stringedRegex(req.body.password)) inputErrors.push("password");
+            if (!module.exports.stringedRegex(req.body.areaOfInterest)) inputErrors.push("areaOfInterest");
+            if (!module.exports.stringedRegex(req.body.streetName)) inputErrors.push("streetName");
+
+
+
             if(inputErrors.length > 0) reject(inputErrors);
             resolve();
         })
