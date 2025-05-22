@@ -78,6 +78,8 @@
 
 <script setup>
 import { ref } from 'vue'
+import contactUsAPIServices from '../services/contactServices'
+
 
 const form = ref({
   firstName: '',
@@ -93,7 +95,11 @@ async function handleSubmit() {
   submitted.value = false
 
   try {
+    
     submitting.value = true
+    console.log(form.value);
+    await contactUsAPIServices.sendInquiry(form.value);
+    
     await new Promise(resolve => setTimeout(resolve, 1000))
 
     submitted.value = true
@@ -104,6 +110,7 @@ async function handleSubmit() {
     submitting.value = false
   }
 }
+
 </script>
 
 <style scoped>

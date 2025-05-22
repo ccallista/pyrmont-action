@@ -1,5 +1,8 @@
 const jwttokens = require('jsonwebtoken')
+require('dotenv').config()
+const user = require('./user')
 module.exports = {
+
     
     stateRegex : function(input){
         stateRegex = new RegExp(/(NSW|WA|VIC|NT|QLD|TAS|SA)/)
@@ -28,9 +31,22 @@ module.exports = {
     },
 
 
-    async inputValidatorJoinUs(req, res){
-        return new Promise((resolve, reject) => {
+
+    async inputValidatorJoinUs(req, res, db){
+        return new Promise(async (resolve, reject) => {
             const inputErrors = [];
+            if (module.exports.emailRegex(req.body.email)){
+                try{
+                    await user.getCheckUserExists(req.body.email, db);
+                }
+                catch(error){
+                    inputErrors.push("email")
+                }
+            }
+            else{
+                inputErrors.push("email");
+            }
+
             if (!module.exports.stateRegex(req.body.state)) inputErrors.push("state");
             if (!module.exports.emailRegex(req.body.email)) inputErrors.push("email");
             if (!module.exports.phoneNumberRegex(req.body.mobilePhone)) inputErrors.push("mobilePhone");
