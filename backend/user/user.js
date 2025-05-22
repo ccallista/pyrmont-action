@@ -43,6 +43,17 @@ module.exports = {
       })
     },
 
+    async getAllUserDetails(email, db){
+      return new Promise((resolve, reject) => {
+        query = "SELECT * FROM users WHERE email = ?"
+        db.get(query, [email], (error, result) => {
+          if (error) reject("Caused from searching users: " + error);
+          resolve(result);
+        });
+        
+      })
+    },
+
     async getCheckUserExists(email, db){
       return new Promise((resolve, reject) => {
         query = "SELECT COUNT(*) as count FROM users WHERE email = ?"

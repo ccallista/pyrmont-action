@@ -1,8 +1,8 @@
-import Dashboard from "./pages/dashboard.vue"
+import MemberDashboard from "./pages/memberDashboard.vue"
 export const memberRoutes = [
     {
         path: '/member',
-        name: 'Dashboard',
-        component: Dashboard
+        name: 'members',
+        component: MemberDashboard 
     }
 ]

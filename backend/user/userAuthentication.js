@@ -74,25 +74,27 @@ module.exports = {
 
 
     async generateAccessToken(userEmail, roleIndividual){
-        return jwttokens.sign({email: userEmail, role: roleIndividual}, 'accesstoken', {expiresIn: '120s'})
+        return jwttokens.sign({email: userEmail, role: roleIndividual}, process.env.ACCESS_TOKEN , {expiresIn: '3600s'})
     },
 
     async generateRefreshToken(userEmail, roleIndividual){
-        return jwttokens.sign({email: userEmail, role: roleIndividual}, 'refreshToken', {expiresIn: '86400s'})
+        return jwttokens.sign({email: userEmail, role: roleIndividual}, process.env.REFRESH_TOKEN, {expiresIn: '172800s'})
     },
 
 
     
     async verifyToken(req, res, next){
-        const header = req.headers['authorization']
+        // console.log(req)
+        let header = req.headers['authorization']
         const token = header && header.split(' ')[1]
-        if(token == null) res.sendStatus(401).json({message: "Error occurred during login"})
-        jwttokens.verify(token, "secrettoken", (err) => {
-            if(err) return res.sendStatus(403).json({message: "Error occurred during login"})
+        if(token == null) {res.status(401).json({message: "Error occurred during login"})}
+        jwttokens.verify(token, process.env.ACCESS_TOKEN, (err) => {
+            if(err) return res.status(403).json({message: "Error occurred during login"})
+            req.user = jwttokens.decode(token);
             next();
         })
 
-    }
+    },
 
 
 }

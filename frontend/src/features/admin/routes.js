@@ -1,4 +1,4 @@
-import Dashboard from "./pages/dashboard.vue"
+import Dashboard from "./pages/adminDashboard.vue"
 export const adminRoutes = [
     {
         path: '/admin',
