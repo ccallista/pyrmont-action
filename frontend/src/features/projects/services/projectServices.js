@@ -2,14 +2,14 @@ import api from "../../../services/api"
 
 const projectsAPI = {    
     viewClosedProjects(){
-        return api.get("/api/getClosedProjects");
+        return api.get("/api/getClosedProjects", "");
     },
     
     viewOpenProjects(){
-        return api.get("/api/getOpenProjects");
+        return api.get("/api/getOpenProjects", "");
     },
     getIndividualProjects(projectName){
-        return api.get("/api/projects/" + projectName);
+        return api.get("/api/projects/" + projectName ,"");
     }
 }
 

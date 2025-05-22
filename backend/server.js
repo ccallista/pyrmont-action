@@ -37,6 +37,11 @@ db.exec(`
     project_id INTEGER NOT NULL,
     FOREIGN KEY (project_id) REFERENCES projects(project_id)
   );
+  
+  CREATE TABLE IF NOT EXISTS roles(
+    role_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    role_type TEXT NOT NULL
+  );
 
     CREATE TABLE IF NOT EXISTS users (
     email TEXT PRIMARY KEY,
@@ -48,7 +53,9 @@ db.exec(`
     streetName VARCHAR(100) NOT NULL,
     city VARCHAR(50) NOT NULL,
     state VARCHAR(3) NOT NULL,
-    postcode VARCHAR(4) NOT NULL
+    postcode VARCHAR(4) NOT NULL,
+    role_id INTEGER NOT NULL,
+    FOREIGN KEY (role_id) REFERENCES roles(role_id)
   );
 
     CREATE TABLE IF NOT EXISTS images (
@@ -57,9 +64,6 @@ db.exec(`
     caption TEXT NOT NULL,
     alt TEXT NOT NULL
   );
-
-
-  
 
 `);
 

@@ -57,8 +57,7 @@
             signUpData.state = stateChosen.value;
             const response = await joinUsService.joinus(signUpData);
             const signUpResponse = await response.json();
-            console.log(signUpResponse)
-            signUpError.emailError= signUpError.passwordError = signUpError.firstNameError = signUpError.postcodeError = signUpError.stateError = signUpError.lastNameError = signUpError.cityError = signUpError.mobilePhoneError = false;
+            signUpError.emailError= signUpError.passwordError = signUpError.streetNameError = signUpError.areaOfInterestError = signUpError.firstNameError = signUpError.postcodeError = signUpError.stateError = signUpError.lastNameError = signUpError.cityError = signUpError.mobilePhoneError = false;
             if(response.status === 400){
                 for(const error of signUpResponse.errors){
                     if(error ==="email") signUpError.emailError = true;
@@ -69,13 +68,14 @@
                     if(error ==="city") signUpError.cityError = true;
                     if(error ==="state") signUpError.stateError = true;
                     if(error ==="postcode") signUpError.postcodeError = true;
-                    console.log(error);
+                    if(error ==="streetName") signUpError.streetNameError = true;
+                    if(error === "areaOfInterest") signUpError.areaOfInterestError = true;
 
                 }
             }
         }
         catch(error){
-            console.log(error)
+            console.err(error)
         }
      
     }
@@ -101,12 +101,12 @@
                         <input type="text" id="first-name" v-model=signUpData.firstName placeholder="First Name" :class="{'error-border': signUpError.firstNameError}" />
                         <input type="text" id="last-name" v-model=signUpData.lastName placeholder="Last Name" :class="{'error-border': signUpError.lastNameError}" />
                         <input type="tel" id="mobile-phone" v-model=signUpData.mobilePhone placeholder="Mobile Phone" :class="{'error-border': signUpError.mobilePhoneError}" pattern="[0-9]{10}" />
-                        <input type="text" v-model="signUpData.areaOfInterest" id="areaOfInterestTextArea" placeholder="Area of Interest">
+                        <input type="text" v-model="signUpData.areaOfInterest" :class="{'error-border': signUpError.cityError}" id="areaOfInterestTextArea" placeholder="Area of Interest">
                     </div>
 
                     <h2>Address Details</h2>
                     <div class="address-details-section">
-                        <input type="text" id="street-name" v-model=signUpData.streetName placeholder="Street Name"/>
+                        <input type="text" id="street-name" :class="{'error-border': signUpError.streetNameError}" v-model=signUpData.streetName placeholder="Street Name"/>
                         <input type="text" id="city" :class="{'error-border': signUpError.cityError}" v-model=signUpData.city placeholder="City"/>
          
 

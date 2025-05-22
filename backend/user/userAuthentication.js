@@ -30,6 +30,8 @@ module.exports = {
         return nameOrCityRegex.test(input);
     },
 
+    
+
 
 
     async inputValidatorJoinUs(req, res, db){
@@ -48,11 +50,18 @@ module.exports = {
             }
 
             if (!module.exports.stateRegex(req.body.state)) inputErrors.push("state");
+            if (!module.exports.emailRegex(req.body.email)) inputErrors.push("email");
             if (!module.exports.phoneNumberRegex(req.body.mobilePhone)) inputErrors.push("mobilePhone");
             if (!module.exports.postcodeRegex(req.body.postcode)) inputErrors.push("postcode");
             if (!module.exports.stringedRegex(req.body.firstName)) inputErrors.push("firstName");
             if (!module.exports.stringedRegex(req.body.lastName)) inputErrors.push("lastName");
             if (!module.exports.stringedRegex(req.body.city)) inputErrors.push("city");
+            if (!module.exports.stringedRegex(req.body.password)) inputErrors.push("password");
+            if (!module.exports.stringedRegex(req.body.areaOfInterest)) inputErrors.push("areaOfInterest");
+            if (!module.exports.stringedRegex(req.body.streetName)) inputErrors.push("streetName");
+
+
+
             if(inputErrors.length > 0) reject(inputErrors);
             resolve();
         })
@@ -72,26 +81,28 @@ module.exports = {
 
 
 
-    async generateAccessToken(userEmail){
-        return jwttokens.sign({email: userEmail}, process.env.ACCESS_TOKEN, {expiresIn: '120s'})
+    async generateAccessToken(userEmail, roleIndividual){
+        return jwttokens.sign({email: userEmail, role: roleIndividual}, process.env.ACCESS_TOKEN , {expiresIn: '3600s'})
     },
 
-    async generateRefreshToken(userEmail){
-        return jwttokens.sign({email: userEmail}, process.env.REFRESH_TOKEN, {expiresIn: '86400s'})
+    async generateRefreshToken(userEmail, roleIndividual){
+        return jwttokens.sign({email: userEmail, role: roleIndividual}, process.env.REFRESH_TOKEN, {expiresIn: '172800s'})
     },
 
 
     
     async verifyToken(req, res, next){
-        const header = req.headers['authorization']
+        // console.log(req)
+        let header = req.headers['authorization']
         const token = header && header.split(' ')[1]
-        if(token == null) res.sendStatus(401).json({message: "Error occurred during login"})
-        jwttokens.verify(token, "secrettoken", (err) => {
-            if(err) return res.sendStatus(403).json({message: "Error occurred during login"})
+        if(token == null) {res.status(401).json({message: "Error occurred during login"})}
+        jwttokens.verify(token, process.env.ACCESS_TOKEN, (err) => {
+            if(err) return res.status(403).json({message: "Error occurred during login"})
+            req.user = jwttokens.decode(token);
             next();
         })
 
-    }
+    },
 
 
 }

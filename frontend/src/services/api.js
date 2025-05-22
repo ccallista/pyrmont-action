@@ -2,9 +2,16 @@ const server = "http://localhost:5000";
 
 
 const api = {
-    async get(endpoint){
+    async get(endpoint, token){
         try{
-            const response = await fetch(server + "/" + endpoint);
+            const response = await fetch(server + "/" + endpoint, {
+                method: "GET",
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                    
+                },
+            });
             return response;
 
         }
@@ -13,14 +20,14 @@ const api = {
         }
     },
 
-    async post(endpoint, data){
+    async post(endpoint, data, token){
         try{
             const response = await fetch(server + "/" + endpoint, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
+                    'authorization': token,
                 },
-                
                 body: JSON.stringify(data),
                 
             })
@@ -31,6 +38,8 @@ const api = {
             console.error('Error caused from POST Request:' + error)
         }
     }
+
+    
 }
 
 export default api;
