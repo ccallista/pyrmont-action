@@ -50,12 +50,22 @@ db.exec(`
     postcode VARCHAR(4) NOT NULL
   );
 
+    CREATE TABLE IF NOT EXISTS images (
+    image_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    image_file_name TEXT NOT NULL,
+    caption TEXT NOT NULL,
+    alt TEXT NOT NULL
+  );
+
+
+  
+
 `);
 
 
 const userRouter = require('./user/userRoutes')
 const projectRoutes = require('./projects/projectRoutes')
-
+const galleryRouter = require('./gallery/galleryRoutes')
 app.use("", function(req, res, next) {
   req.db = db;
   next();
@@ -66,6 +76,11 @@ app.use("", function(req, res, next) {
   req.db = db;
   next();
 }, projectRoutes);
+
+app.use("", function(req, res, next) {
+  req.db = db;
+  next();
+}, galleryRouter);
 
 
 newsModel(db);

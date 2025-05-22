@@ -12,8 +12,7 @@ module.exports = {
             res.status(200).json({ message: 'User Inserted successfully.'});
         }
         catch(error){
-            console.log(error);
-            return res.status(403).json({message: 'Error has occurred when registering', errors : error});
+            return res.status(400).json({message: 'Error has occurred when registering', errors : error});
         }
     },
 
