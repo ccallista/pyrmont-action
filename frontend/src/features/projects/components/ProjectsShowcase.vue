@@ -9,9 +9,7 @@
       <div class="showcase__text-block">
         <h2 class="showcase__title">OUR {{projectType}} PROJECTS</h2>
         <p class="showcase__desc">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nunc ipsum,
-          pulvinar quis porttitor at, bibendum ut turpis. Etiam porttitor, elit eu
-          cursus placerat, odio...
+          Explore our {{projectType}} projects, showcasing our commitment to transparency, learning, and real-world impact for the Pyrmont community.
         </p>
       </div>
 
@@ -58,10 +56,6 @@
           <div class="showcase__stat">
             <span class="showcase__stat-number">5</span>
             <span class="showcase__stat-label">closed</span>
-          </div>
-          <div class="showcase__stat">
-            <span class="showcase__stat-number">45</span>
-            <span class="showcase__stat-label">ongoing</span>
           </div>
         </div>
       </div>

@@ -69,19 +69,14 @@
     padding: 2% 6%
 }
 
-.project-individual img{
-    padding-top: 3%;
-    width: 100%;
-}
-
 .project-individual-title {
     display: flex;
     align-items: center;
-    gap: 2%''
+    gap: 2%
 }
 
 .project-individual-title img{
-    width: 70vw;
+    width: 50vw;
     margin-left: auto;
 }
 
@@ -93,6 +88,7 @@
     font-family: 'Inter', sans-serif;
     font-weight: 200;
     text-transform: uppercase;
+    white-space: pre-line;
 }
 
 .project-individual-date {

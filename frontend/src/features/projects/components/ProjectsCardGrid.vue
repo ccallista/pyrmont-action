@@ -106,6 +106,7 @@ defineProps({
   background-color: #ffffff;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 450px;
 }
 
 .project-card:hover {
@@ -118,10 +119,10 @@ defineProps({
    ----------------------------------------------------------- */
 .project-card__image-container {
   position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 3;
+  height: 200px;
   overflow: hidden;
   background-color: #f2f2f2; /* fallback if image doesn’t load */
+  flex-shrink: 0;
 }
 
 /* Card Image */
@@ -163,6 +164,12 @@ defineProps({
   font-weight: 700;
   color: #333;
   line-height: 1.3;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .project-card__body {
@@ -170,6 +177,11 @@ defineProps({
   color: #555;
   font-size: 1rem;
   line-height: 1.6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
 }
 
 /* -----------------------------------------------------------

@@ -276,27 +276,4 @@
     transform: none;
   }
 }
-
-/* ============================
-   7. Hover Text Effect
-============================ */
-.hover-text-fx {
-  transition:
-      font-weight 0.3s ease,
-      transform 0.3s ease,
-      text-shadow 0.3s ease;
-}
-
-/*
-  On hover:
-   - Keep the same color (#444)
-   - Slightly increase font-weight
-   - Add a bit of text-shadow to enhance readability
-   - Subtly scale text for emphasis
-*/
-.hover-text-fx:hover {
-  font-weight: 600; /* or 500 if you want a lighter bold */
-  text-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
-  transform: scale(1.02);
-}
 </style>

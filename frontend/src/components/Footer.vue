@@ -127,7 +127,7 @@ export default {
 }
 
 .footer .logo img {
-    width: 80%;
+    width: 100%;
     transition: .5s ease all;
 }
 
