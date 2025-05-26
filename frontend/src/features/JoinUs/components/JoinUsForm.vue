@@ -5,6 +5,7 @@
     import {handleError, onMounted, ref} from 'vue'
     import joinUsService from '../services/joinUsAuthService'
     import { reactive } from 'vue';
+    import { useRouter } from 'vue-router';
 
 
 
@@ -66,10 +67,12 @@
 
     }
 
+    const router = useRouter();
 
   
     const handleSubmit = async () => {
         try{
+
             signUpData.value.state = stateChosen.value;
             const response = await joinUsService.joinus(signUpData.value);
             const signUpResponse = await response.json();
@@ -81,6 +84,10 @@
                     }
                 })
        
+            }
+            else{
+
+                await router.push('/login')
             }
 
         }
