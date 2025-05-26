@@ -2,7 +2,7 @@
 
 
 <script setup>
-    import {handleError, ref} from 'vue'
+    import {handleError, onMounted, ref} from 'vue'
     import joinUsService from '../services/joinUsAuthService'
     import { reactive } from 'vue';
 
@@ -22,57 +22,67 @@
     ])
 
     const signUpError = reactive({
-        emailError: false,
-        passwordError: false,
-        firstNameError: false,
-        lastNameError: false,
-        mobilePhoneError: false,
-        areaOfInterestError: false,
-        streetNameError: false,
-        cityError: false,
-        stateError: false,
-        postcodeError: false
-        
-    })
-  
-
-    const signUpData = {
         email: '',
         password: '',
         firstName: '',
         lastName: '',
-        mobilePhone: null,
+        mobilePhone: '',
         areaOfInterest: '',
         streetName: '',
         city: '',
         state: '',
-        postcode: null
-    }
+        postcode: ''
 
+    })
+
+
+    const signUpData = ref({
+        email: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+        mobilePhone: '',
+        areaOfInterest: '',
+        streetName: '',
+        city: '',
+        state: '',
+        postcode: ''
+    })
+
+    const passwordValidator = ref({
+        minlength: false,
+        uppercase: false,
+        lowercase: false,
+        number: false,
+        symbols: false,
+    })
+
+    function passwordCheck(){
+        passwordValidator.value.minlength = signUpData.value.password.length >= 10;
+        passwordValidator.value.uppercase = /[A-Z]/.test(signUpData.value.password)
+        passwordValidator.value.lowercase = /[a-z]/.test(signUpData.value.password)
+        passwordValidator.value.number = /[0-9]/.test(signUpData.value.password)
+        passwordValidator.value.symbols = /[!@#$%^&*()/?]/.test(signUpData.value.password)
+
+    }
 
 
   
     const handleSubmit = async () => {
         try{
-            signUpData.state = stateChosen.value;
-            const response = await joinUsService.joinus(signUpData);
+            signUpData.value.state = stateChosen.value;
+            const response = await joinUsService.joinus(signUpData.value);
             const signUpResponse = await response.json();
-            signUpError.emailError= signUpError.passwordError = signUpError.streetNameError = signUpError.areaOfInterestError = signUpError.firstNameError = signUpError.postcodeError = signUpError.stateError = signUpError.lastNameError = signUpError.cityError = signUpError.mobilePhoneError = false;
+            // signUpError.emailError= signUpError.passwordError = signUpError.streetNameError = signUpError.areaOfInterestError = signUpError.firstNameError = signUpError.postcodeError = signUpError.stateError = signUpError.lastNameError = signUpError.cityError = signUpError.mobilePhoneError = false;
             if(response.status === 400){
-                for(const error of signUpResponse.errors){
-                    if(error ==="email") signUpError.emailError = true;
-                    if(error ==="password") signUpError.passwordError = true;
-                    if(error ==="firstName") signUpError.firstNameError = true;
-                    if(error ==="lastName") signUpError.lastNameError = true;
-                    if(error ==="mobilePhone") signUpError.mobilePhoneError = true;
-                    if(error ==="city") signUpError.cityError = true;
-                    if(error ==="state") signUpError.stateError = true;
-                    if(error ==="postcode") signUpError.postcodeError = true;
-                    if(error ==="streetName") signUpError.streetNameError = true;
-                    if(error === "areaOfInterest") signUpError.areaOfInterestError = true;
-
-                }
+                Object.entries(signUpResponse.errors).forEach(([key, value]) => {
+                    if(signUpError.hasOwnProperty(key)){
+                        signUpError[key] = value[0];
+                    }
+                })
+       
             }
+
         }
         catch(error){
             console.err(error)
@@ -92,34 +102,89 @@
 
                     <h2>Login Details</h2>
                     <div class="login-details-section">
-                        <input type="email" id="email" placeholder="Email address" v-model="signUpData.email" :class="{'error-border': signUpError.emailError}"/>
-                        <input type="password" id="password" placeholder="Password" v-model="signUpData.password" :class="{'error-border': signUpError.passwordError}" />
+                        <div class ="field">
+                            <input id="email" placeholder="Email address" v-model="signUpData.email" :class="{'error-border': signUpError.email}"/>
+                            <p v-if="signUpError.email" class="error-message">{{ signUpError.email }}</p>
+                        </div>
+
+                        <div class="field">
+                            <input type="password" id="password" @input="passwordCheck" placeholder="Password" v-model="signUpData.password" :class="{'error-border': signUpError.password}" />
+                            <p v-if="signUpError.password" class="error-message">{{ signUpError.password }}</p>
+                            <ul class="password-requirement-section">
+                                <li :class="{'password-accept': passwordValidator.minlength}">At least 10 characters</li>
+                                <li :class="{'password-accept': passwordValidator.uppercase}">At least one upper-case letter</li>
+                                <li :class="{'password-accept': passwordValidator.lowercase}">At least one lower-case letter</li>
+                                <li :class="{'password-accept': passwordValidator.number}">At least one digit</li>
+                                <li :class="{'password-accept': passwordValidator.symbols}">At least one symbol</li>
+
+
+                            </ul>
+                        </div>
+
                     </div>
 
                     <h2>Personal Details</h2>
                     <div class="personal-details-section">
-                        <input type="text" id="first-name" v-model=signUpData.firstName placeholder="First Name" :class="{'error-border': signUpError.firstNameError}" />
-                        <input type="text" id="last-name" v-model=signUpData.lastName placeholder="Last Name" :class="{'error-border': signUpError.lastNameError}" />
-                        <input type="tel" id="mobile-phone" v-model=signUpData.mobilePhone placeholder="Mobile Phone" :class="{'error-border': signUpError.mobilePhoneError}" pattern="[0-9]{10}" />
-                        <input type="text" v-model="signUpData.areaOfInterest" :class="{'error-border': signUpError.cityError}" id="areaOfInterestTextArea" placeholder="Area of Interest">
+
+                        <div class="name-section">
+                            <div class="field">
+                                <input type="text" id="first-name" v-model=signUpData.firstName placeholder="First Name" :class="{'error-border': signUpError.firstName}" />
+                                <p v-if="signUpError.firstName" class="error-message">{{ signUpError.firstName }}</p>
+                            </div>
+
+                            <div class="field">
+                                <input type="text" id="last-name" v-model=signUpData.lastName placeholder="Last Name" :class="{'error-border': signUpError.lastName}" />
+                                <p v-if="signUpError.lastName" class="error-message">{{ signUpError.lastName }}</p>
+                            </div>
+                        </div>
+
+                        <div class="other-personal-info-section">
+                            <div class="field">
+                                <input type="tel" id="mobile-phone" v-model=signUpData.mobilePhone placeholder="Mobile Phone" :class="{'error-border': signUpError.mobilePhone}" />
+                                <p v-if="signUpError.mobilePhone" class="error-message">{{ signUpError.mobilePhone }}</p>
+                            </div>
+                            <div class="field">
+                                <input type="text" v-model="signUpData.areaOfInterest" :class="{'error-border': signUpError.city}" id="areaOfInterestTextArea" placeholder="Area of Interest">
+                                <p v-if="signUpError.areaOfInterest" class="error-message">{{ signUpError.areaOfInterest }}</p>
+                            </div>
+                        </div>
+
                     </div>
+
+
 
                     <h2>Address Details</h2>
                     <div class="address-details-section">
-                        <input type="text" id="street-name" :class="{'error-border': signUpError.streetNameError}" v-model=signUpData.streetName placeholder="Street Name"/>
-                        <input type="text" id="city" :class="{'error-border': signUpError.cityError}" v-model=signUpData.city placeholder="City"/>
-         
+                        <div class="field">
+                            <input type="text" id="street-name" :class="{'error-border': signUpError.streetName}" v-model=signUpData.streetName placeholder="Street Name"/>
+                            <p v-if="signUpError.streetName" class="error-message">{{ signUpError.streetName }}</p>
+                        </div>
+                        
+                        <div class="state-and-city-row">
+                            <div class="field">
+                                <input type="text" id="city" :class="{'error-border': signUpError.city}" v-model=signUpData.city placeholder="City"/>
+                                <p v-if="signUpError.city" class="error-message">{{ signUpError.city }}</p>
+                            </div> 
 
-                        <select v-model="stateChosen" id="state" :class="signUpError.stateError ? 'error-border' : 'input-valid'" required>
-                            <option v-for="state in stateOptions" :value="state.value" :disabled=state.placeholder :hidden=state.placeholder :selected=state.placeholder>
-                                {{ state.text }}
-                            </option>
-                        </select>
-                        <input type="text" id="postcode" v-model=signUpData.postcode placeholder="Postcode" pattern="[0-9]{4}" :class="{'error-border': signUpError.postcodeError}"/>
+                            <div class="field">
+                                <select v-model="stateChosen" id="state" :class="signUpError.state ? 'error-border' : 'input-valid'" required>
+                                    <option v-for="state in stateOptions" :value="state.value" :disabled=state.placeholder :hidden=state.placeholder :selected=state.placeholder>
+                                        {{ state.text }}
+                                    </option>
+                                </select>
+                                <p v-if="signUpError.state" class="error-message">{{ signUpError.state }}</p>
+                            </div>
+
+                        </div>
+
+                        <div class="field">
+                            <input type="text" id="postcode" v-model=signUpData.postcode placeholder="Postcode" :class="{'error-border': signUpError.postcode}"/>
+                            <p v-if="signUpError.postcode" class="error-message">{{ signUpError.postcode }}</p>
+                        </div>
+
                     </div>
                     <button id="submitBtn" type="submit">Sign Up</button>
-
-
+                    
                 </form>
             </div>
         </div>
@@ -127,41 +192,48 @@
 </template>
 
 <style scoped>
+   
+    .error-message{
+        color: #c90e21;
+        font-size: small;
+        margin:0px;
+        
+    }
     .error-border{
-        border: 1px solid red;
+        border: 1px solid #c90e21;
     }
     .input-valid{
         border: 1px solid #cbc8c8;
     }
-
+  
     .signup-container{
-        height: 130vh;
+        height: 140vh;
         display: flex;
-        flex-direction: column;
         justify-content: center;
         background-color: #F8F8F8;
         align-items: center;
     }
 
-
+    
     .signup-form-container{
-        display: inline-block;
-        position:absolute;
-        top: 100px;
-
- 
+        display: flex;
+        padding: 3rem;
+        
+        justify-content: center;
+        align-items: center;
+    
         background-color: white;
-        width: 50vw;
         border-radius: 5px;
-        padding:3rem;
     }
+
+
+
 
     .login-details-section{
         display: flex;
-        row-gap: 20px;
         flex-direction: column;
-        margin-bottom: 20px;
-        margin-top: 10px;
+        margin-bottom: 10px;
+    
     }
 
     ::placeholder{
@@ -175,25 +247,24 @@
     h2{
       color: #EBBD6D;
       font-size: large;
-      margin-bottom: 0px;
+      margin-bottom: 10px;
     }
 
     h3{
         color: #3A474E;
         font-size: large;
     }
-    hr{
-        border-top: 2px solid black;
-        margin-bottom: 20px;
-    }
+
 
     input, select{
         border-radius: 3px;
         border: 1px solid;
         background-color: #F8F8F8;
         border-color: #cbc8c8;
-        height: 35px
+        height: 35px;
+        width:100%;
     }
+    
     
 
     h1{
@@ -210,39 +281,43 @@
         color: grey;
     }
 
-
-    .personal-details-section, .address-details-section{
-        margin-top: 10px;
-        margin-bottom: 20px;
-        display:grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        grid-template-rows: repeat(3, 1fr);
-        row-gap: 20px;
-        column-gap: 10px;
+    .field{
+        padding: 0px;
         
-
+        margin-bottom: 20px;
     }
-
-    #mobile-phone{
-        grid-row: 2;
-        grid-column: 1/3;
-
+  
+    .name-section{
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: repeat(1, 1fr);
+        column-gap: 10px;
+        margin-top: 10px;
+        
     }
-
-
-    #street-name{
-        grid-row:1;
-        grid-column: 1/3;
-    }
-   
-    #postcode, #areaOfInterestTextArea{
-        grid-row: 3;
-        grid-column: 1/3;
+    .state-and-city-row{
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: repeat(1, 1fr);
+        column-gap: 10px;
+    
     }
 
     
     #areaOfInterestTextArea{
         resize: none;
+    }
+    .password-accept{
+        color: green;
+        
+    }
+    .password-requirement-section{
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        padding-top: 2px;
+        font-size: 9px;
+        color: #c90e21;
     }
 
     #submitBtn{
