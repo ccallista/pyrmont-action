@@ -37,7 +37,7 @@ module.exports = {
 
     passwordRegex:function(input){
         // checks for lower case, upper case, symbol and length greater than 11, respectively
-        passwordsRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{11,}$/)
+        passwordsRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{10,}$/)
         return passwordsRegex.test(input)
     },
 

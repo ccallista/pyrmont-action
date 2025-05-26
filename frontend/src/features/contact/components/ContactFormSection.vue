@@ -13,12 +13,21 @@
       <!-- Glass-like card with form -->
       <div class="form-card">
         <div
-            v-if="submitted"
+            v-if="submitted && !error"
             class="success-message"
             role="status"
             aria-live="polite"
         >
           Thank you for contacting us! We’ll get back to you soon.
+        </div>
+
+        <div
+            v-if="submitted && error"
+            class="error-message"
+            role="status"
+            aria-live="polite"
+        >
+          You have entered some wrong information in the form. Please try again.
         </div>
 
         <form @submit.prevent="handleSubmit" novalidate>
@@ -29,6 +38,7 @@
                 v-model="form.firstName"
                 id="firstName"
                 type="text"
+                :class="{'error-message-input-box': errorMessageForm.firstNameError}"
             />
           </div>
 
@@ -39,6 +49,7 @@
                 v-model="form.lastName"
                 id="lastName"
                 type="text"
+                :class="{'error-message-input-box': errorMessageForm.lastNameError}"
             />
           </div>
 
@@ -49,6 +60,7 @@
                 v-model="form.email"
                 id="email"
                 type="email"
+                :class = "{'error-message-input-box': errorMessageForm.emailError}"
             />
           </div>
 
@@ -59,6 +71,7 @@
                 v-model="form.message"
                 id="message"
                 rows="5"
+                :class = "{'error-message-input-box': errorMessageForm.messageError}"
             ></textarea>
           </div>
 
@@ -88,6 +101,14 @@ const form = ref({
   message: ''
 })
 
+const errorMessageForm = ref({
+  firstNameError: false,
+  lastNameError: false,
+  emailError: false,
+  messageError: false
+})
+
+const error = ref(false)
 const submitted = ref(false)
 const submitting = ref(false)
 
@@ -95,15 +116,28 @@ async function handleSubmit() {
   submitted.value = false
 
   try {
-    
+    errorMessageForm.value = { firstNameError: false, lastNameError: false, emailError: false, messageError: false }
     submitting.value = true
-    console.log(form.value);
-    await contactUsAPIServices.sendInquiry(form.value);
+    error.value = false
+    const response =  await contactUsAPIServices.sendInquiry(form.value);
+    const message = await response.json();
+    submitted.value = true
+
+    if(!response.ok){
+      errorMessageForm.value.messageError = message.errors.indexOf("message") !== -1;
+      errorMessageForm.value.emailError = message.errors.indexOf("email") !== -1;
+      errorMessageForm.value.firstNameError = message.errors.indexOf("firstName") !== -1;
+      errorMessageForm.value.lastNameError = message.errors.indexOf("lastName") !== -1;
+      error.value = true
+      console.log(errorMessageForm)
+    }
+    else{
+      form.value = { firstName: '', lastName: '', email: '', message: '' }
+    }
     
     await new Promise(resolve => setTimeout(resolve, 1000))
 
-    submitted.value = true
-    form.value = { firstName: '', lastName: '', email: '', message: '' }
+    
   } catch (error) {
     console.error('Submission error:', error)
   } finally {
@@ -194,6 +228,24 @@ async function handleSubmit() {
   animation: popIn 0.5s ease;
 }
 
+
+.error-message {
+  background-color: #f5e9e8;
+  border: 1px solid #e6cdc8;
+  color: #bb0e05;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  text-align: center;
+  animation: popIn 0.5s ease;
+}
+
+.error-message-input-box{
+  border: 1px solid #c52d2d;
+}
+
+
 @keyframes popIn {
   0% {
     transform: scale(0.95);
@@ -216,6 +268,8 @@ label {
   font-family: 'Inter', sans-serif;
   color: #fff;
 }
+
+
 
 input, textarea {
   width: 100%;
