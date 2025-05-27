@@ -5,7 +5,7 @@
         </div>
         <div class="project-individual-title">
             <div class="project-individual-title-text">
-                <h2 class="project-individual-header"> {{individualProject.project_name }}</h2>
+                <h2 class="project-individual-header"> {{ individualProject.project_name }}</h2>
                 <p class="project-individual-date"> <i class="fa-solid fa-calendar-days"></i>  {{ individualProject.project_date }}</p>
             </div>
             <img :src="`/src/assets/Projects/${individualProject.project_image}`" alt="project Image" />
@@ -28,7 +28,7 @@
     const individualProject = ref({});
     const relatedProjects = ref([]);
     const route = useRoute();
-    watch(() => route.params.projectName, fetchData, {immediate: true})
+    watch(() => route.params.projectId, fetchData, {immediate: true})
 
     async function fetchData(id){
 

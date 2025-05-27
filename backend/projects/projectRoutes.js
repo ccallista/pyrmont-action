@@ -11,9 +11,9 @@ router.get('/api/getClosedProjects', function(req, res){
 
 
 
-router.get('/api/projects/:projectName', function(req, res){
+router.get('/api/projects/:projectId', function(req, res){
     
-    projectController.getIndividualProjects(req.params['projectName'], res, req.db)
+    projectController.getIndividualProjects(req.params['projectId'], res, req.db)
 
 })
 
