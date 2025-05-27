@@ -15,7 +15,7 @@
       <div class="contact-card">
         <div class="contact-icon" v-html="emailSvg"></div>
         <h3>Email Us</h3>
-        <p>pyrmont.email.com</p>
+        <p>covenor@pyrmontaction.org.au</p>
       </div>
     </div>
   </section>
@@ -63,7 +63,7 @@ html, body {
 
 /* CONTACT CARD (Glassmorphic style) */
 .contact-card {
-  width: 220px;
+  width: 250px;
   min-height: 140px;
   padding: 1.5rem;
   border-radius: 1rem;
