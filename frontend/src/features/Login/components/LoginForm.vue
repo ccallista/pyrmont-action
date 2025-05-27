@@ -16,6 +16,8 @@ import loginAuthenticationService from '../services/loginAuthServices'
             const details = await response.json();
             localStorage.setItem('accessToken', details.token.accessToken);
             localStorage.setItem('refreshToken', details.token.refreshToken);
+            localStorage.setItem('loggedIn', true);
+            localStorage.setItem('role', details.user.role);
             
             if(details.user.role === 0){
                 await router.push('/admin')
