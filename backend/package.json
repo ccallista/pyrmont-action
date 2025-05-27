@@ -13,7 +13,8 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "nodemailer": "^7.0.3",
-    "sqlite3": "^5.1.6"
+    "sqlite3": "^5.1.6",
+    "vuex": "^4.1.0"
   },
   "keywords": [],
   "author": "",

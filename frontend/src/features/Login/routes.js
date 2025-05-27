@@ -4,5 +4,6 @@ export const loginRoutes = [
         path: '/login',
         name: 'Login',
         component: LoginView
+     
     }
 ]

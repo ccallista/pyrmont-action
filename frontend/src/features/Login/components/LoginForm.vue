@@ -14,8 +14,12 @@ import loginAuthenticationService from '../services/loginAuthServices'
             const response = await loginAuthenticationService.login(loginInput);
             loginErrors.value = response.ok ? false : true;
             const details = await response.json();
-            localStorage.setItem('accessToken', details.token.accessToken);
-            localStorage.setItem('refreshToken', details.token.refreshToken);
+            this.$store.commit('setLoggedIn', true)
+            this.$store.commit('setUserRole', details.user.role)
+            this.$store.commit('setAccessToken', details.token.accessToken)
+            this.$store.commit('setRefreshToken', details.token.refreshToken)
+            // localStorage.setItem('accessToken', details.token.accessToken);
+            // localStorage.setItem('refreshToken', details.token.refreshToken);
             
             if(details.user.role === 0){
                 await router.push('/admin')
