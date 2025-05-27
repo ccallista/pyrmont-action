@@ -10,7 +10,7 @@
                             <li><router-link class="link" :to="{
                                 name: 'Individual Projects', params: {
                                     projectType: projectItem.project_type,
-                                    projectName: projectItem.project_name
+                                    projectId: projectItem.project_id
                                 }
                             }">LEARN MORE</router-link></li>
                         </ul>
