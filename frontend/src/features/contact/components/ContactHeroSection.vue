@@ -8,14 +8,14 @@
       <div class="contact-card">
         <div class="contact-icon" v-html="phoneSvg"></div>
         <h3>Call Us</h3>
-        <p>1800 333 000</p>
+        <p>(+61) 414 997 089</p>
       </div>
 
       <!-- Card 2: Email -->
       <div class="contact-card">
         <div class="contact-icon" v-html="emailSvg"></div>
         <h3>Email Us</h3>
-        <p>pyrmont.email.com</p>
+        <p>convenor@pyrmontaction.org.au</p>
       </div>
     </div>
   </section>
@@ -51,30 +51,6 @@ html, body {
   color: #fff;
 }
 
-/* RADIAL OVERLAY: white “vignette” around edges */
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-
-  /* A radial gradient that starts transparent in the center,
-     getting whiter/stronger at the edges. */
-  background: radial-gradient(
-      circle at center,
-      rgba(255, 255, 255, 0.0) 0%,
-      rgba(255, 255, 255, 0.2) 40%,
-      rgba(255, 255, 255, 0.4) 70%,
-      rgba(255, 255, 255, 0.7) 100%
-  );
-
-  transition: opacity 0.4s ease;
-}
-
-.contact-hero:hover .hero-overlay {
-  opacity: 0;
-}
-
 /* CONTACT CARDS WRAPPER */
 .contact-cards {
   position: relative;
@@ -87,7 +63,7 @@ html, body {
 
 /* CONTACT CARD (Glassmorphic style) */
 .contact-card {
-  width: 220px;
+  width: 250px;
   min-height: 140px;
   padding: 1.5rem;
   border-radius: 1rem;

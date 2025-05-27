@@ -14,4 +14,8 @@ defineProps({
 .project-individual-details {
     padding-top: 2%;
 }
+
+.project-individual-description {
+  white-space: pre-line;
+}
 </style>

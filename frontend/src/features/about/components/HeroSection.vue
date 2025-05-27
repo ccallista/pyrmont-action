@@ -26,7 +26,6 @@
           Discover who we are, what we stand for, and how we work together
           to shape a thriving community in the heart of Pyrmont.
         </p>
-        <button class="hero-cta-button">Learn More</button>
       </div>
     </div>
 
@@ -136,27 +135,6 @@ import pyrmontView from '@/assets/pyrmont-view.jpg'
   transition: transform 5s ease;
 }
 
-.hero-left-image-wrapper:hover .hero-left-image {
-  transform: scale(1.05);
-}
-
-/*
-   Subtle white overlay that becomes transparent on hover.
-   (Same effect on BOTH left and right images for consistency.)
-*/
-.hero-left-image-wrapper::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right,
-      rgba(255, 255, 255, 0.7),
-      rgba(255, 255, 255, 0.2));
-  transition: opacity 0.4s ease;
-}
-
-.hero-left-image-wrapper:hover::before {
-  opacity: 0;
-}
 
 /*
    ------------------------------------------------
@@ -180,28 +158,6 @@ import pyrmontView from '@/assets/pyrmont-view.jpg'
   object-fit: cover;
   object-position: center;
   transition: transform 5s ease;
-}
-
-.hero-image-wrapper:hover .hero-image {
-  transform: scale(1.05);
-}
-
-/*
-   White overlay on the right side that fades out on hover
-   (matching the left side's effect).
-*/
-.hero-image-wrapper::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to left,
-      rgba(255, 255, 255, 0.7),
-      rgba(255, 255, 255, 0.2));
-  transition: opacity 0.4s ease;
-}
-
-.hero-image-wrapper:hover::before {
-  opacity: 0;
 }
 
 @media (max-width: 992px) {
@@ -251,7 +207,7 @@ import pyrmontView from '@/assets/pyrmont-view.jpg'
   font-family: 'League Spartan', sans-serif;
   font-size: 24px;
   font-weight: 700;
-  color: #EBBD6D;
+  color: #c99132;
   margin-bottom: 0.5rem;
 }
 
@@ -269,25 +225,6 @@ import pyrmontView from '@/assets/pyrmont-view.jpg'
   line-height: 1.6;
   color: #4f4f4f;
   margin-bottom: 2rem;
-}
-
-/* CTA Button */
-.hero-cta-button {
-  background-color: #EBBD6D;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 0.75rem 1.5rem;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
-  transition: background-color 0.2s, box-shadow 0.2s;
-}
-
-.hero-cta-button:hover {
-  background-color: #ebae45;
-  box-shadow: 0 6px 16px rgba(52, 152, 219, 0.4);
 }
 
 /*

@@ -18,7 +18,7 @@ export const projectsRoutes = [
         path: '/projects/:projectType',
         children: [
             {
-                path: ':projectName',
+                path: ':projectId',
                 name: 'Individual Projects',
                 component: () => import('./pages/IndividualProjectView.vue'),
             },

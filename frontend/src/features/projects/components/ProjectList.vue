@@ -1,8 +1,8 @@
 <template>
     <div class="project-list">
         <h2 class="project-list-header">More {{projectType}} Projects</h2>
-        <div v-for="projectItem in projects" :key="projectItem.project_name" class="project-list-item">
-            <router-link class="link" :to="{
+        <div v-for="projectItem in projects" :key="projectItem.project_id" class="project-list-item">
+            <router-link class="link-projects" :to="{
                 name: 'Individual Projects', params: {
                     projectType: projectItem.project_type,
                     projectName: projectItem.project_name
@@ -59,7 +59,7 @@ defineProps({
     border-bottom: 1px solid #000;
 }
 
-.project-list-item .link {
+.project-list-item .link-projects {
     display: flex;
     overflow: hidden;
     text-decoration: none;

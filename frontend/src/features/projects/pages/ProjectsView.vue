@@ -1,11 +1,10 @@
 <template>
   <div class="projects-page">
-    <ProjectsShowcase :projectType="route.params.projectType"/>
-    <FilterBar />
+    <ProjectsShowcase :projectType="route.params.projectType" :count=count />
 
     <ProjectsCardGrid
         heading="Open Projects"
-        :projects=project
+        :projects=project 
     />
 
   </div>
@@ -20,33 +19,33 @@
     import projects from "../services/projectServices"
     const route = useRoute();
     const project = ref([]);
+    const count = ref({open: 0, closed: 0})
     let response;
 
     watch(() => route.params.projectType, fetchData, {immediate: true})
 
     async function fetchData(id){
         try{
-            if(id === "open"){
-              console.log("it as here")
-              response = await projects.viewOpenProjects();
+            const openProjects = await projects.viewOpenProjects();
+            const closedProjects = await projects.viewClosedProjects();
+            const openData = await openProjects.json();
+            const closedData = await closedProjects.json();
+
+            if (id === "open") {
+              project.value = openData.projects;
+            } else if (id === "closed") {
+              project.value = closedData.projects;
             }
 
-            if(id === "closed"){
-              response = await projects.viewClosedProjects();
-            }
-          
-            const projectData = await response.json();
-            project.value = projectData.projects;
+            count.value = {
+              open: openData.projects.length,
+              closed: closedData.projects.length,
+            };
         }
 
         catch(error){
             console.log("Error with inserting images onto the webpage")
         }
     }
-
-
-  
-
- 
 
 </script>

@@ -102,11 +102,6 @@
   display: block;
 }
 
-.map-container:hover {
-  transform: scale(1.02);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
 .location-info {
   flex: 1 1 300px;
   padding: 2rem;
@@ -160,14 +155,6 @@
   margin: 0;
   line-height: 1.6;
   color: #444;
-}
-
-.location-info h2:hover,
-.location-info h3:hover,
-.location-info h4:hover,
-.location-info p:hover {
-  transform: scale(1.02);
-  transition: transform 0.3s ease;
 }
 
 .fade-in {

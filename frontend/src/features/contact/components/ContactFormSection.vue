@@ -168,10 +168,6 @@ async function handleSubmit() {
   transition: transform 0.3s ease;
 }
 
-.ask-us-title:hover {
-  transform: scale(1.02);
-}
-
 .form-card {
   /* Glassmorphism background */
   background-color: rgba(255, 255, 255, 0.15);
@@ -260,7 +256,7 @@ textarea:focus {
 }
 
 .submit-btn:hover:not(:disabled) {
-  background-color: #2980b9;
+  background-color: #ebae45;
   transform: translateY(-2px);
 }
 

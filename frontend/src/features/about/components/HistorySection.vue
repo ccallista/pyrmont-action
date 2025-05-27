@@ -129,7 +129,7 @@
 
 /* Glow on hover for the main heading */
 .history-title:hover {
-  text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+  text-shadow: 0 0 10px #EBBD6D, 0 0 20px #EBBD6D;
 }
 
 .blue-underline {
@@ -262,27 +262,6 @@
 
 .hover-pulse:hover {
   transform: scale(1.1);
-}
-
-/* ===================================
-   7. Hover Effects for Paragraphs
-=================================== */
-/* ===================================
-   7. Hover Effects for Paragraphs
-=================================== */
-.hover-text-fx {
-  /* Ensures a smooth transition on size, weight, and shadow changes */
-  transition:
-      transform 0.3s ease,
-      font-weight 0.3s ease,
-      text-shadow 0.3s ease;
-}
-
-/* Hover effect: subtle scale, increased font weight, and a bit of shadow */
-.hover-text-fx:hover {
-  transform: scale(1.02);
-  font-weight: 600; /* Slightly bolder */
-  text-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
 }
 
 </style>
