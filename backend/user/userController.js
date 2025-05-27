@@ -39,7 +39,6 @@ module.exports = {
 
         }
         catch(error){
-            console.log(error)
             return res.status(403).json({message: 'Error occurred during login'});
         }
     },

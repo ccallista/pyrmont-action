@@ -21,7 +21,7 @@ module.exports = {
             from: req.body.email,
             to: process.env.HOST_EMAIL,
             subject: `Contact Us Inquiry from ${req.body.email} ` ,
-            html: `<html><h3>Recipient: ${req.body.firstName} ${req.body.lastName}</h3><p>${req.body.message}</p></html>`
+            html: `<html><h3>Sender Name: ${req.body.firstName} ${req.body.lastName}</h3><p>${req.body.message}</p></html>`
         }
         return email
 
