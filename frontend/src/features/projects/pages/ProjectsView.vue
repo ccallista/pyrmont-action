@@ -1,7 +1,6 @@
 <template>
   <div class="projects-page">
     <ProjectsShowcase :projectType="route.params.projectType" :count=count />
-    <FilterBar />
 
     <ProjectsCardGrid
         heading="Open Projects"

@@ -40,10 +40,10 @@
                 <h1>Contact Us</h1>
                 <div class="contact-us-body">
                     <p>
-                        <i class="fa-solid fa-location-dot"></i> Deputy Convenor, Ken Louden & Secretary, Elizabeth Elenius
+                        <i class="fa-solid fa-location-dot"></i> 79A John St, Pyrmont NSW 2009
                     </p>
                     <p>
-                        <i class="fa-solid fa-phone"></i> (02) 123 234 345
+                        <i class="fa-solid fa-phone"></i> (+61) 414 997 089
                     </p>
                     <p>
                         <i class="fa-solid fa-envelope"></i> convenor@pyrmontaction.org.au

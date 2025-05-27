@@ -8,14 +8,14 @@
       <div class="contact-card">
         <div class="contact-icon" v-html="phoneSvg"></div>
         <h3>Call Us</h3>
-        <p>1800 333 000</p>
+        <p>(+61) 414 997 089</p>
       </div>
 
       <!-- Card 2: Email -->
       <div class="contact-card">
         <div class="contact-icon" v-html="emailSvg"></div>
         <h3>Email Us</h3>
-        <p>covenor@pyrmontaction.org.au</p>
+        <p>convenor@pyrmontaction.org.au</p>
       </div>
     </div>
   </section>
