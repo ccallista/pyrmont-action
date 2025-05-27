@@ -50,11 +50,11 @@
         <!-- Stats Bar -->
         <div class="showcase__stats-bar">
           <div class="showcase__stat">
-            <span class="showcase__stat-number">7</span>
+            <span class="showcase__stat-number">{{  count.open }}</span>
             <span class="showcase__stat-label">open</span>
           </div>
           <div class="showcase__stat">
-            <span class="showcase__stat-number">5</span>
+            <span class="showcase__stat-number">{{ count.closed }}</span>
             <span class="showcase__stat-label">closed</span>
           </div>
         </div>
@@ -67,6 +67,10 @@
 defineProps({
     projectType: {
         type: String,
+        required: true
+    },
+    count: {
+        type: Object,
         required: true
     }
 });
@@ -174,6 +178,9 @@ import workersImage from '@/assets/Projects/pyrmont_project_manager.png'
 .showcase__text-block {
   flex: 0 0 45%;
   padding-right: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .showcase__title {
@@ -227,36 +234,11 @@ import workersImage from '@/assets/Projects/pyrmont_project_manager.png'
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.showcase__image-wrapper:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-}
 
 .showcase__image-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-/* 5.1.1 Arrow icon overlay (appears on hover) */
-.showcase__arrow-icon {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background-color: var(--color-black-overlay);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-.showcase__image-wrapper:hover .showcase__arrow-icon {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /*

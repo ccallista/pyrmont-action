@@ -51,30 +51,6 @@ html, body {
   color: #fff;
 }
 
-/* RADIAL OVERLAY: white “vignette” around edges */
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-
-  /* A radial gradient that starts transparent in the center,
-     getting whiter/stronger at the edges. */
-  background: radial-gradient(
-      circle at center,
-      rgba(255, 255, 255, 0.0) 0%,
-      rgba(255, 255, 255, 0.2) 40%,
-      rgba(255, 255, 255, 0.4) 70%,
-      rgba(255, 255, 255, 0.7) 100%
-  );
-
-  transition: opacity 0.4s ease;
-}
-
-.contact-hero:hover .hero-overlay {
-  opacity: 0;
-}
-
 /* CONTACT CARDS WRAPPER */
 .contact-cards {
   position: relative;
