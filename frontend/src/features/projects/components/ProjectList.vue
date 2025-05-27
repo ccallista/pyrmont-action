@@ -5,7 +5,7 @@
             <router-link class="link-projects" :to="{
                 name: 'Individual Projects', params: {
                     projectType: projectItem.project_type,
-                    projectName: projectItem.project_name
+                    projectId: projectItem.project_id
                 }
             }">
                 <div class="project-list-image">

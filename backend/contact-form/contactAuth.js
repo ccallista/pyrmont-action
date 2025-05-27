@@ -11,6 +11,12 @@ module.exports = {
         return nameOrCityRegex.test(input);
     },
 
+    stringedMessage : function(input){
+        messageRegex = new RegExp(/^[a-zA-Z0-9!@#$&()\-`'.+,\"].{0,}/g);
+        return messageRegex.test(input);
+    },
+
+
 
     async inputValidateContactForm(req, res){
         return new Promise((resolve, reject) => {
@@ -18,7 +24,7 @@ module.exports = {
             if (!module.exports.emailRegex(req.body.email)) inputErrors.push("email");
             if (!module.exports.stringedRegex(req.body.firstName)) inputErrors.push("firstName");
             if (!module.exports.stringedRegex(req.body.lastName)) inputErrors.push("lastName");
-
+            if (!module.exports.stringedMessage(req.body.message)) inputErrors.push("message");
             if(inputErrors.length > 0) reject(inputErrors);
             resolve();
         })

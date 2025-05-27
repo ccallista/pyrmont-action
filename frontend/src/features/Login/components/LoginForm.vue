@@ -64,7 +64,7 @@ import loginAuthenticationService from '../services/loginAuthServices'
                         </div>
                         <div class="error-and-forgot-password-section">
                             
-                            <span v-if="loginErrors" id="error-message">Incorrect Username and Password</span>
+                            <span v-if="loginErrors" id="error-message">Incorrect Username or Password</span>
                             <a href="link" id="forgot-password-link"> Forgot Password </a>
                         </div>
                         
