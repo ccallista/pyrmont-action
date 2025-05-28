@@ -97,7 +97,7 @@ module.exports = {
 
             if (!module.exports.postcodeRegex(req.body.postcode)){
                 if(req.body.postcode.length <= 0){
-                    errorMessages.password.push("Postcode is required")
+                    errorMessages.postcode.push("Postcode is required")
                 }
                 else{
                     errorMessages.postcode.push("Please enter a valid postcode containing 4 numbers. For example: 2000")
