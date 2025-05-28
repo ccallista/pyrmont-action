@@ -76,7 +76,6 @@
             signUpData.value.state = stateChosen.value;
             const response = await joinUsService.joinus(signUpData.value);
             const signUpResponse = await response.json();
-            // signUpError.emailError= signUpError.passwordError = signUpError.streetNameError = signUpError.areaOfInterestError = signUpError.firstNameError = signUpError.postcodeError = signUpError.stateError = signUpError.lastNameError = signUpError.cityError = signUpError.mobilePhoneError = false;
             if(response.status === 400){
                 Object.entries(signUpResponse.errors).forEach(([key, value]) => {
                     if(signUpError.hasOwnProperty(key)){
@@ -105,7 +104,7 @@
         <div class="signup-container">
             <div class="signup-form-container">
                 <form class="sign-entries" @submit.prevent="handleSubmit">
-                    <h1 id="create-an-account-heading"> Let's create an account </h1>
+                    <h1 id="create-an-account-heading"> Become a member</h1>
 
                     <h2>Login Details</h2>
                     <div class="login-details-section">
@@ -212,27 +211,41 @@
     .input-valid{
         border: 1px solid #cbc8c8;
     }
-  
-    .signup-container{
+    body{
+        background-color: #F8F8F8;
         height: 140vh;
+        /* padding-bottom: 1500px; */
+        padding-bottom: 150vh;
+    }
+    .signup-container{
+        min-height: 120vh;
         display: flex;
         justify-content: center;
         background-color: #F8F8F8;
-        align-items: center;
     }
 
     
     .signup-form-container{
         display: flex;
         padding: 3rem;
-        
+        width: 50%;
+        min-height:100vh;
         justify-content: center;
-        align-items: center;
-    
+        /* align-items: center; */
+        /* max-height: 100vh; */
+        box-sizing: border-box;
         background-color: white;
         border-radius: 5px;
+        margin-top: 1rem;
+        margin-bottom: 20px;
+        
     }
 
+    .sign-entries{
+        width: 100%;
+        min-height: 100%;
+        
+    }
 
 
 
