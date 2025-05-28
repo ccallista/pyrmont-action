@@ -1,7 +1,6 @@
 <template>
   <div class="projects-page">
     <ProjectsShowcase :projectType="route.params.projectType" :count=count />
-
     <ProjectsCardGrid
         heading="Open Projects"
         :projects=project 
@@ -12,7 +11,6 @@
 
 <script setup>
     import ProjectsShowcase from '@/features/projects/components/ProjectsShowcase.vue'
-    import FilterBar from '@/features/projects/components/ProjectsFilterBar.vue'
     import ProjectsCardGrid from '@/features/projects/components/ProjectsCardGrid.vue'
     import { ref, watch } from 'vue';
     import { useRoute } from 'vue-router'

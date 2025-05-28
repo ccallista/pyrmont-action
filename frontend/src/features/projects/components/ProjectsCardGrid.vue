@@ -1,4 +1,5 @@
 <template>
+  <input class="textbox" type="text" v-model="input" placeholder="Search projects..." />
   <section class="projects-grid-section">
     <!-- Section Heading -->
     <!-- <h2 class="projects-grid-heading">{{ heading }}</h2> -->
@@ -6,7 +7,7 @@
     <!-- Projects Grid -->
     <div class="projects-grid">
       <article
-          v-for="(project, index) in projects"
+          v-for="(project, index) in filteredProjects()"
           :key="index"
           class="project-card"
       >
@@ -37,20 +38,30 @@
         </div>
       </article>
     </div>
+
+    <div class="not-found-message" v-if="input&&!filteredProjects().length">
+      <p>No projects found!</p>
+    </div>
   </section>
 </template>
 
 <script setup>
-defineProps({
-  // heading: {
-  //   type: String,
-  //   default: 'Projects'
-  // },
+import { ref } from 'vue'
+
+const props = defineProps({
   projects: {
     type: Array,
     default: () => []
   }
 })
+
+const input = ref('')
+
+function filteredProjects() {
+  return props.projects.filter((project) =>
+    project.project_name.toLowerCase().includes(input.value.toLowerCase()) || project.project_description.toLowerCase().includes(input.value.toLowerCase())
+  );
+}
 </script>
 
 <style scoped>
@@ -91,7 +102,7 @@ defineProps({
    ----------------------------------------------------------- */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 350px));
   gap: 2rem;
 }
 
@@ -205,5 +216,25 @@ defineProps({
 
 .arrow {
   margin-left: 4px;
+}
+
+.textbox {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.textbox:focus {
+  outline: none;
+  border-color: #EBBD6D;
+  box-shadow: 0 0 0 3px rgba(235, 189, 109, 0.5);
+}
+
+.not-found-message {
+  text-align: center;
 }
 </style>
