@@ -31,7 +31,7 @@
       <div class="rules-section__image-wrapper">
         <div class="rules-section__image-background">
           <img
-              src="../../../assets/pyrmont-house.png"
+              src="../../../assets/AboutUs/pyrmont-house.png"
               alt="By-laws building"
               role="img"
               class="rules-section__image"
