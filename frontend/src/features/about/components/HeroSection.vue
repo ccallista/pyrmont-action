@@ -35,8 +35,8 @@
 </template>
 
 <script setup>
-import buildingImage from '@/assets/pyrmont-building.jpg'
-import pyrmontView from '@/assets/pyrmont-view.jpg'
+import buildingImage from '@/assets/AboutUs/pyrmont-building.jpg'
+import pyrmontView from '@/assets/AboutUs/pyrmont-view.jpg'
 </script>
 
 <style scoped>

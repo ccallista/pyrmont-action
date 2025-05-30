@@ -25,7 +25,6 @@ import galleryService from '../services/galleryServices'
 
 const galleryImages = ref([])
 
-const gallerySomething = ref([])
 try{
 
   async function fetchData(){

@@ -28,12 +28,7 @@
             <div class="column">
                 <h1>Gallery</h1>
                 <div class="gallery">
-                    <img src="../assets/carousel1.jpg">
-                    <img src="../assets/carousel2.jpg">
-                    <img src="../assets/carousel3.jpg">
-                    <img src="../assets/carousel4.jpg">
-                    <img src="../assets/carousel4.jpg">
-                    <img src="../assets/carousel4.jpg">
+                    <img  v-for="image in images" :key="image.image_id" :src="`/src/assets/Gallery/${image.image_file_name}`" :alt="image.caption">
                 </div>
             </div>
             <div class="column">
@@ -53,11 +48,27 @@
         </div>
     </div>
 </template>
-<script>
-export default {
-    
+
+<script setup>
+import { ref } from 'vue'
+import galleryService from '../features/gallery/services/galleryServices'
+
+const images = ref([])
+
+try{
+    async function fetchData(){
+        const response = await galleryService.getAllImages();
+        const galleryData = await response.json();
+        images.value = galleryData.images.slice(-8);
+        console.log(images.value)
+    }
+    fetchData();
+}
+catch(error){
+  console.log(error)
 }
 </script>
+
 <style lang="css">
 .footer {
     position: relative;

@@ -22,7 +22,7 @@
 
       <div class="history-floating-image stagger-fade-image">
         <img
-            src="../../../assets/train.png"
+            src="../../../assets/AboutUs/train.png"
             alt="Historic Train"
         />
       </div>
@@ -55,7 +55,7 @@
   margin: 0 auto;
   overflow: hidden;
   font-family: var(--body-font);
-  background: url("@/assets/history-bg.png") center center / cover no-repeat;
+  background: url("@/assets/AboutUs/history-bg.png") center center / cover no-repeat;
   background-attachment: scroll;
 }
 
